@@ -15,6 +15,9 @@ export default function Home({navigation}){
             <View style={{marginTop: 20}}>
                 <Button title="add Object" onPress={() => navigation.navigate('AddObject')}></Button>
             </View>
+            <View style={{marginTop: 20}}>
+                <Button title="view history" onPress={() => navigation.navigate('History')}></Button>
+            </View>
         </View>
     );
 }
