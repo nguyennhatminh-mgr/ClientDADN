@@ -12,6 +12,9 @@ export default function Home({navigation}){
             <View style={{marginTop: 20}}>
                 <Button title="Go to profile" onPress={() => navigation.navigate('Profile')}></Button>
             </View>
+            <View style={{marginTop: 20}}>
+                <Button title="add Object" onPress={() => navigation.navigate('AddObject')}></Button>
+            </View>
         </View>
     );
 }
