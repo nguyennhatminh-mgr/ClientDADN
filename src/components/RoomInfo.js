@@ -44,8 +44,7 @@ export default class RoomInfo extends React.Component{
             <View style ={{flex:5, alignItems: 'center', justifyContent:'center'}}>
               <View style={styles.specification}>
                   <View style={{flex: 2}}>
-                    <Image style={styles.image}
-                    source ={require('../assets/images/icon_light.png')} ></Image>
+                    <Image style={styles.image} source ={require('../assets/images/icon_light.png')} />
                   </View>
                   <View style ={{flex: 5}}>
                   <Text style ={styles.decription}>Số đèn đang bật: {this.props.lightOn} / {this.props.numOfLight}</Text>
@@ -53,8 +52,7 @@ export default class RoomInfo extends React.Component{
                 </View>
               <View style={styles.specification}>
                 <View style={{flex: 2}}>
-                  <Image style={styles.image}
-                  source ={require('../../assets/images/icon_brightness.png')} ></Image>
+                  <Image style={styles.image} source ={require('../../assets/images/icon_brightness.png')} />
                 </View>
                 <View style ={{flex: 5}}>
                     <Text style ={styles.decription}>Độ sáng hiện tại: {this.props.brightness}</Text>
@@ -106,8 +104,7 @@ export default class RoomInfo extends React.Component{
             <View style ={{flex:5, alignItems: 'center', justifyContent:'center'}}>
               <View style={styles.specification}>
                   <View style={{flex: 2}}>
-                    <Image style={styles.image}
-                    source ={require('../assets/images/icon_light.png')} ></Image>
+                    <Image style={styles.image} source ={require('../assets/images/icon_light.png')} />
                   </View>
                   <View style ={{flex: 5}}>
                   <Text style ={styles.decription}>Số đèn đang bật: {this.props.lightOn} / {this.props.numOfLight}</Text>
@@ -115,8 +112,7 @@ export default class RoomInfo extends React.Component{
                 </View>
               <View style={styles.specification}>
                 <View style={{flex: 2}}>
-                  <Image style={styles.image}
-                  source ={require('../assets/images/icon_brightness.png')} ></Image>
+                  <Image style={styles.image} source ={require('../assets/images/icon_brightness.png')} />                
                 </View>
                 <View style ={{flex: 5}}>
                     <Text style ={styles.decription}>Độ sáng hiện tại: {this.props.brightness}</Text>
