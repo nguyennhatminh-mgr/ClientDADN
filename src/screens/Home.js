@@ -1,20 +1,39 @@
 import React from 'react';
-import {View, Text ,Button,StyleSheet} from 'react-native';
+import {View, Text ,Button,StyleSheet,Image,ScrollView} from 'react-native';
+import ItemInHome from '../components/ItemInHome';
+import setting_image from '../assets/images/setting.png';
+import user_info from '../assets/images/userinfo.png';
+import add_device from '../assets/images/add_device.png';
+import room_info from '../assets/images/room_info.jpg';
+import control_device from '../assets/images/control_device.jpg';
+import history from '../assets/images/history.jpg';
 
 export default function Home({navigation}){
     return (
-        <View>
-            <Text>This is Home Screens</Text>
-            <Button
-            title="Navigate"
-            onPress={() => navigation.navigate('InHome')}
-            ></Button>
-            <View style={{marginTop: 20}}>
-                <Button title="Go to profile" onPress={() => navigation.navigate('Profile')}></Button>
+        <ScrollView style={styles.container}>
+            <View style={styles.rowinhome}>
+                <ItemInHome navigation={navigation} screen="Profile" image={control_device} title="Control device"/>
+                <ItemInHome navigation={navigation} screen="Home" image={history} title="View history"/>
             </View>
-            <View style={{marginTop: 20}}>
-                <Button title="add Object" onPress={() => navigation.navigate('AddObject')}></Button>
+
+            <View style={styles.rowinhome}>
+                <ItemInHome navigation={navigation} screen="Profile" image={add_device} title="Add device"/>
+                <ItemInHome navigation={navigation} screen="Profile" image={room_info} title="View room"/>
             </View>
-        </View>
+            <View style={styles.rowinhome}>
+                <ItemInHome navigation={navigation} screen="Profile" image={setting_image} title="Set light level"/>
+                <ItemInHome navigation={navigation} screen="Profile" image={user_info} title="User Info"/>
+            </View>
+        </ScrollView>
+
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    rowinhome: {
+        flexDirection: "row"
+    }
+});
