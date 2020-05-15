@@ -17,7 +17,7 @@ export default function Home({navigation}){
             </View>
 
             <View style={styles.rowinhome}>
-                <ItemInHome navigation={navigation} screen="Profile" image={add_device} title="Add device"/>
+                <ItemInHome navigation={navigation} screen="AddObject" image={add_device} title="Add device"/>
                 <ItemInHome navigation={navigation} screen="Profile" image={room_info} title="View room"/>
             </View>
             <View style={styles.rowinhome}>
