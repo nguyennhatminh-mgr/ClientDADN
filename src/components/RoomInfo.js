@@ -23,7 +23,7 @@ export default class RoomInfo extends React.Component{
       if(time>= 18){
         return(
           <View style = {{width: screenWidth, height: screenHeight}}>
-              <ImageBackground source = {require('../../assets/images/nightbackground.jpg')}
+              <ImageBackground source = {require('../assets/images/nightbackground.jpg')}
               style = {styles.background}>
               <View style={{
                           flex: 1,
@@ -42,7 +42,7 @@ export default class RoomInfo extends React.Component{
                     alignItems:'center', 
                     }}>
               <View style={{flex:2,}}>
-                <Image source = {require('../../assets/images/icon_house.png')}
+                <Image source = {require('../assets/images/icon_house.png')}
                 style= {{height : 60, width:60, padding: 20, marginLeft: 20,  backgroundColor:'transparent'}}
                 ></Image>
               </View>
@@ -56,7 +56,7 @@ export default class RoomInfo extends React.Component{
               <View style={{flexDirection:'row'}}>
                   <View style={{flex: 2}}>
                     <Image style={styles.image}
-                    source ={require('../../assets/images/icon_light.png')} ></Image>
+                    source ={require('../assets/images/icon_light.png')} ></Image>
                   </View>
                   <View style ={{flex: 5}}>
                   <Text style ={styles.decription}>Số đèn đang bật: {this.props.lightOn} / {this.props.numOfLight}</Text>
@@ -65,7 +65,7 @@ export default class RoomInfo extends React.Component{
               <View style={{flexDirection:'row'}}>
                 <View style={{flex: 2}}>
                   <Image style={styles.image}
-                  source ={require('../../assets/images/icon_brightness.png')} ></Image>
+                  source ={require('../assets/images/icon_brightness.png')} ></Image>
                 </View>
                 <View style ={{flex: 5}}>
                     <Text style ={styles.decription}>Độ sáng hiện tại: {this.props.brightness}</Text>
@@ -92,7 +92,7 @@ export default class RoomInfo extends React.Component{
       else{
         return(
           <View style = {{width: screenWidth, height: screenHeight}}>
-              <ImageBackground source = {require('../../assets/images/daybackground.jpg')}
+              <ImageBackground source = {require('../assets/images/daybackground.jpg')}
               style = {styles.background}>
               <View style={{
                           flex: 1,
@@ -111,7 +111,7 @@ export default class RoomInfo extends React.Component{
                     alignItems:'center', 
                     }}>
               <View style={{flex:2,}}>
-                <Image source = {require('../../assets/images/icon_house.png')}
+                <Image source = {require('../assets/images/icon_house.png')}
                 style= {{height : 60, width:60, padding: 20, marginLeft: 20,  backgroundColor:'transparent'}}
                 ></Image>
               </View>
@@ -125,7 +125,7 @@ export default class RoomInfo extends React.Component{
               <View style={{flexDirection:'row'}}>
                   <View style={{flex: 2}}>
                     <Image style={styles.image}
-                    source ={require('../../assets/images/icon_light.png')} ></Image>
+                    source ={require('../assets/images/icon_light.png')} ></Image>
                   </View>
                   <View style ={{flex: 5}}>
                   <Text style ={styles.decription}>Số đèn đang bật: {this.props.lightOn} / {this.props.numOfLight}</Text>
@@ -134,7 +134,7 @@ export default class RoomInfo extends React.Component{
               <View style={{flexDirection:'row'}}>
                 <View style={{flex: 2}}>
                   <Image style={styles.image}
-                  source ={require('../../assets/images/icon_brightness.png')} ></Image>
+                  source ={require('../assets/images/icon_brightness.png')} ></Image>
                 </View>
                 <View style ={{flex: 5}}>
                     <Text style ={styles.decription}>Độ sáng hiện tại: {this.props.brightness}</Text>
