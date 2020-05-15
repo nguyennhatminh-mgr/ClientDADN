@@ -15,6 +15,7 @@ export default function Home({navigation}){
                 <ItemInHome navigation={navigation} screen="Profile" image={control_device} title="Control device"/>
                 <ItemInHome navigation={navigation} screen="Home" image={history} title="View history"/>
             </View>
+
             <View style={styles.rowinhome}>
                 <ItemInHome navigation={navigation} screen="Profile" image={add_device} title="Add device"/>
                 <ItemInHome navigation={navigation} screen="Profile" image={room_info} title="View room"/>
@@ -24,6 +25,7 @@ export default function Home({navigation}){
                 <ItemInHome navigation={navigation} screen="Profile" image={user_info} title="User Info"/>
             </View>
         </ScrollView>
+
     );
 }
 
