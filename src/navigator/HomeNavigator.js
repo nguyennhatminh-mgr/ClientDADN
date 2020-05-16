@@ -8,6 +8,7 @@ import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
 
 import AddNavigator from './AddNavigator';
+import SetLightLevel from '../screens/SetLightLevel';
 
 
 const Stack = createStackNavigator();
@@ -33,6 +34,9 @@ export default function HomeNavigator(){
             <Stack.Screen name="AddObject"
             component={AddNavigator}
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            <Stack.Screen name="SetLightLevel"
+            component={SetLightLevel}
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff",title:"SetLightLevel"}}/>
         </Stack.Navigator>
     );
 }

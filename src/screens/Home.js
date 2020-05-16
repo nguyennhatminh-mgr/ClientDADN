@@ -21,7 +21,7 @@ export default function Home({navigation}){
                 <ItemInHome navigation={navigation} screen="Profile" image={room_info} title="View room"/>
             </View>
             <View style={styles.rowinhome}>
-                <ItemInHome navigation={navigation} screen="Profile" image={setting_image} title="Set light level"/>
+                <ItemInHome navigation={navigation} screen="SetLightLevel" image={setting_image} title="Set light level"/>
                 <ItemInHome navigation={navigation} screen="Profile" image={user_info} title="User Info"/>
             </View>
         </ScrollView>
