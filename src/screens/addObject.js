@@ -9,15 +9,13 @@ import building from '../assets/images/building.png';
 
 const Items = ({icon, type, onClick, imageSrc}) => {
     return (
-        <TouchableOpacity onPress={onClick} style={Styles.Items}>
-            
-                <ImageBackground source={imageSrc} style={Styles.image}> 
-                    <FontAwesome name={icon} size={30}/>
-                    <Text style={Styles.Text}>Add {type}</Text>
-                    <FontAwesome name="angle-right" size={30}/>
-                </ImageBackground>     
-              
-        </TouchableOpacity>
+            <TouchableOpacity onPress={onClick} style={Styles.Items}>
+                    <ImageBackground source={imageSrc} style={Styles.image} imageStyle={{ borderRadius: 10}}> 
+                        <FontAwesome name={icon} size={30}/>
+                        <Text style={Styles.Text}>Add {type}</Text>
+                        <FontAwesome name="angle-right" size={30}/>
+                    </ImageBackground>     
+            </TouchableOpacity>
     );
 }
 
@@ -32,8 +30,8 @@ export default function AddObjectScreen({navigation}){
             <View style={Styles.listItem}>
                 <Items icon="rss-square" type="Sensor" onClick={()=>navigation.navigate('AddSensor')} imageSrc={lightSensor}/>
                 <Items icon="lightbulb-o" type="Light" imageSrc={light}/>
-                <Items icon="building" type="Room" imageSrc={room}/>
-                <Items icon="building" type="Building" imageSrc={building}/>
+                <Items icon="home" type="Room" imageSrc={room}/>
+                {/* <Items icon="building" type="Building" imageSrc={building}/> */}
             </View> 
         </View>       
     );
@@ -66,7 +64,8 @@ const Styles = StyleSheet.create({
         shadowOffset: {width:2, height:2},
         elevation: 6,
         height:"100%",
-        width:"100%"
+        width:"100%",
+        borderRadius:20,
       },
     header_icon: {
         // position: "absolute",
@@ -74,12 +73,20 @@ const Styles = StyleSheet.create({
     },
     listItem:{
         flex:6,
+        backgroundColor:"#3f3f44",
+        alignItems:"center",
+        justifyContent:"space-evenly"
+
     },
-    Items:{height:"25%",borderRadius:20, width:"100%"},
+    Items:{
+        height:"20%",
+        borderRadius:20,
+        width:"80%", 
+    },
     Text:{
+        borderRadius:20,
         paddingLeft:5,
         fontSize: height/30,
         width:"80%"
     },
-
 })

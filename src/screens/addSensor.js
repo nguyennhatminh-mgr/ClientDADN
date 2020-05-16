@@ -11,7 +11,7 @@ const Items = ({type, placeholder}) => {
                         style={Styles.row_2_Info}
                         placeholder={placeholder}
                         placeholderTextColor="#000"
-                        fontSize={50}
+                        fontSize={height/30}
                     ></TextInput>
         </View>
     );
@@ -112,7 +112,7 @@ const Styles = StyleSheet.create({
           alignItems:"center"
       },
       btn:{
-        width:"20%",
+        width:"30%",
         height:"30%",
         borderRadius:20,
         
