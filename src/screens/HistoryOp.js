@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text ,TouchableOpacity, StyleSheet} from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Items = ({type,onClick}) => {
     return (
