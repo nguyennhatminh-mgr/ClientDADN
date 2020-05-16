@@ -1,62 +1,74 @@
 import React from 'react';
-import {View, Text ,TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text ,TouchableOpacity,ScrollView, StyleSheet} from 'react-native';
 
-const Items = ({type,onClick}) => {
+const Items = ({name,id,owner,onClick}) => {
     return (
-        <View style={Styles.blockItem}>
-            <TouchableOpacity onPress={onClick}>
+            <TouchableOpacity style={Styles.blockItem} onPress={onClick}>
                 <View style={Styles.item}>
-                    <Text >Room {type[0]}</Text>
+                    <Text> Room {name}</Text>
+                    <Text> ID: {id}</Text>
+                    <Text> User: {owner} </Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={onClick}>
-                <View style={Styles.item}>
-                    <Text>Room {type[1]}</Text>
-                </View>
-            </TouchableOpacity>
-        </View>
     );
 }
 
 export default function HistoryOp({navigation}){
     return (
-        <View style={Styles.listContainer}>
+        <ScrollView style={Styles.listContainer}>
             <Text style={Styles.title}>List Room</Text>
-            <Items type={[1,2]} onClick={()=>navigation.navigate('Room')}></Items>
-            <Items type={[3,4]} onClick={()=>navigation.navigate('Room')}></Items>
-            <Items type={[5,6]} onClick={()=>navigation.navigate('Room')}></Items>
-            <Items type={[7,8]} onClick={()=>navigation.navigate('Room')}></Items>
-        </View>
+            <View style={Styles.container}>
+                <Items name={101} id={1} owner={'A'} onClick={()=>navigation.navigate('Room')}></Items>
+                <Items name={102} id={2} owner={'B'} onClick={()=>navigation.navigate('Room')}></Items>
+            </View>
+
+            <View style={Styles.container}>
+                <Items name={103} id={3} owner={'C'} onClick={()=>navigation.navigate('Room')}></Items>
+                <Items name={104} id={4} owner={'D'} onClick={()=>navigation.navigate('Room')}></Items>
+            </View>
+
+            <View style={Styles.container}>
+                <Items name={105} id={5} owner={'A'} onClick={()=>navigation.navigate('Room')}></Items>
+                <Items name={106} id={6} owner={'B'} onClick={()=>navigation.navigate('Room')}></Items>
+            </View>
+
+            <View style={Styles.container}>
+                <Items name={107} id={7} owner={'C'} onClick={()=>navigation.navigate('Room')}></Items>
+                <Items name={108} id={8} owner={'D'} onClick={()=>navigation.navigate('Room')}></Items>
+            </View>
+        </ScrollView>
     );
 }
 
 const Styles = StyleSheet.create({
     listContainer: {
         flex:1,
-        flexDirection: 'column',
-        justifyContent: 'space-around',
     },
     title: {
-        margin: 'auto',
         flex:1,
         justifyContent: 'center',
         fontWeight: 'bold',
         color: 'blue',
         fontSize: 30,
+        textAlign:'center',
         alignItems: 'center',
+        fontFamily:'Times New Roman'
     },
-    item:{
-        width: 100,
-        height: 100,
-        borderWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'yellow',
-    },
+    
     blockItem:{
-        flex: 2,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
+        flex: 1,
+        margin: 8,
+        backgroundColor: "#fff",
+        shadowColor:'#000',
+        shadowOpacity: 0.5,
+        shadowRadius: 10,
+        shadowOffset: {width:2, height:2},
+        borderRadius: 4,
+        justifyContent:'center',
     },
+
+    container:{
+        flex:1,
+        flexDirection:'row',
+    }
 })
