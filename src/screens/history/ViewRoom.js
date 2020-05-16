@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { View ,Text ,ScrollView,TouchableOpacity, StyleSheet} from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
 
 const Lamps=({id,mode,control})=>{
@@ -54,7 +54,7 @@ export default class ViewRoom extends Component{
     handlePicker = (datetime) => {
         this.setState({
             isVisible: false,
-            chosenDate: moment(datetime).format('MMMM, Do YYYY HH')
+            chosenDate: moment(datetime).format('MMMM, Do YYYY HH:mm')
         })
     }
     showPicker = () => {
@@ -62,10 +62,9 @@ export default class ViewRoom extends Component{
             isVisible: true
         })
     }
-    hidePicker = (datetime) => {
+    hidePicker = () => {
         this.setState({
-            isVisible: false,
-            chosenDate: moment(datetime).format('MMMM, Do YYYY HH')
+            isVisible: false
         })
     }
 
@@ -76,10 +75,12 @@ export default class ViewRoom extends Component{
                     <TouchableOpacity style={styles.button} onPress={this.showPicker}>
                         <Text style={styles.text}>Select Date</Text>
                     </TouchableOpacity>
-                    <DateTimePicker
+                    <DateTimePickerModal
                         isVisible={this.state.isVisible}
                         onConfirm={this.handlePicker}
                         onCancel={this.hidePicker}
+                        mode={'datetime'}
+                        is24Hour={false}
                     />
                     <Text style={{color:'red', fontSize:20,}}>{this.state.chosenDate}</Text>
                 </View>
