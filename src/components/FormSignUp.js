@@ -25,8 +25,7 @@ export default class FormSignUp extends Component{
                     <Image style={styles.icon_input} source={require('../assets/images/password.png')}/>
                     <TextInput secureTextEntry={true} style={styles.email_input} placeholder="Retype Password"/>
                 </View>
-                <View style={styles.typeuser}>
-                    {/* <FontAweSome  name="caret-down" size={26} color="#fff"/> */}
+                {/* <View style={styles.typeuser}>
                     <Picker selectedValue={this.state.selectedTypeUser}
                     style={styles.typeuserpicker}
                     itemStyle={styles.typeuserpickeritem}
@@ -34,7 +33,7 @@ export default class FormSignUp extends Component{
                         <Picker.Item label="Admin Building" value="adbuilding"/>
                         <Picker.Item label="Admin Room" value="adroom"/>
                     </Picker>
-                </View>
+                </View> */}
                 <View>
                     <TouchableOpacity style={styles.btn_submit}
                     onPress={() => {
