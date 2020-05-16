@@ -8,6 +8,7 @@ import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
 
 import AddNavigator from './AddNavigator';
+import History from './History';
 
 
 const Stack = createStackNavigator();
@@ -24,15 +25,24 @@ export default function HomeNavigator(){
             <Stack.Screen name="Home"
             component={Home}
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            
             <Stack.Screen name="InHome"
             component={InHome}
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            
             <Stack.Screen name="Profile"
             component={Profile}
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            
             <Stack.Screen name="AddObject"
             component={AddNavigator}
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            
+            <Stack.Screen name="History"
+            component={History}
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+
+
         </Stack.Navigator>
     );
 }

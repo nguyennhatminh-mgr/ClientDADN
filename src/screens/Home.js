@@ -13,7 +13,7 @@ export default function Home({navigation}){
         <ScrollView style={styles.container}>
             <View style={styles.rowinhome}>
                 <ItemInHome navigation={navigation} screen="Profile" image={control_device} title="Control device"/>
-                <ItemInHome navigation={navigation} screen="Home" image={history} title="View history"/>
+                <ItemInHome navigation={navigation} screen="History" image={history} title="View history"/>
             </View>
 
             <View style={styles.rowinhome}>
