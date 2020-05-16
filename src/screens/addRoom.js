@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text ,TextInput,TouchableOpacity, StyleSheet, Button, Dimensions} from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const { width, height } = Dimensions.get('window');
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Items = ({type, placeholder}) => {
     return (
@@ -22,13 +22,13 @@ export default function AddSensorScreen({navigation}){
         <View style={Styles.listContainer}>
 
         <View style={Styles.header}>
-            <FontAwesome name="plus-circle" size={height/4} style={Styles.header_icon}/>
+        <FontAwesome name="plus-circle" size={height/4} style={Styles.header_icon}/>
         </View>
 
         <View style={Styles.body}>  
             <View style={Styles.Info}>
-                <Items type={"Building"} placeholder={"H6"}/>
-                <Items type={"Room"} placeholder={"710"}/>
+                <Items type={"Admin Room"} placeholder={"Ngo Ba Kha"}/>
+                <Items type={"Admin Building"} placeholder={"Nguyen Van A"}/>
                 <Items type={"ID"} placeholder={"1"}/>
             </View>
 
@@ -37,7 +37,7 @@ export default function AddSensorScreen({navigation}){
                     <Button
                     title="Save"
                     color="#841584"
-                    accessibilityLabel="add new Sensor to database"
+                    accessibilityLabel="add new Room to database"
                     />
                 </View>
                 

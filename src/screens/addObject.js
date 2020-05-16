@@ -24,13 +24,13 @@ export default function AddObjectScreen({navigation}){
         <View style={Styles.listContainer}>
 
             <View style={Styles.header}>
-                <FontAwesome name="plus-circle" size={height/4} style={Styles.header_icon}/>
+                <FontAwesome name="plus-circle" size={height/4} color={"#231903"}/>
             </View>
 
             <View style={Styles.listItem}>
                 <Items icon="rss-square" type="Sensor" onClick={()=>navigation.navigate('AddSensor')} imageSrc={lightSensor}/>
-                <Items icon="lightbulb-o" type="Light" imageSrc={light}/>
-                <Items icon="home" type="Room" imageSrc={room}/>
+                <Items icon="lightbulb-o" type="Light" onClick={()=>navigation.navigate('AddLight')} imageSrc={light}/>
+                <Items icon="home" type="Room" onClick={()=>navigation.navigate('AddRoom')} imageSrc={room}/>
                 {/* <Items icon="building" type="Building" imageSrc={building}/> */}
             </View> 
         </View>       
@@ -47,7 +47,7 @@ const Styles = StyleSheet.create({
     },
     header: {
         flex: 3,
-        backgroundColor: "#cceabb",
+        backgroundColor: "#1aaa1a",
         alignItems:"center",
         justifyContent:"center"
     },
@@ -68,12 +68,10 @@ const Styles = StyleSheet.create({
         borderRadius:20,
       },
     header_icon: {
-        // position: "absolute",
-        // bottom: 20
     },
     listItem:{
         flex:6,
-        backgroundColor:"#3f3f44",
+        backgroundColor:"#9dc6a7",
         alignItems:"center",
         justifyContent:"space-evenly"
 
