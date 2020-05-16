@@ -27,15 +27,15 @@ export default class RoomInfo extends React.Component{
                           flex: 1,
                           justifyContent: 'center',
                           alignItems: 'center'}}>
-              <Text style={styles.text1}>Lần cập nhật cuối: {this.state.time}</Text>
+              <Text style={styles.header}>Last refreshed : {this.state.time}</Text>
             </View>
             <View style ={styles.user}>
               <View style={{flex:2,}}>
                 <Image style= {styles.big_icon} source = {require('../assets/images/icon_house.png')}/>
               </View>
               <View style ={{flex: 5}}>
-                <Text style ={styles.text}>Mã phòng: {this.props.roomID}</Text>
-                <Text style ={styles.decription}>Chủ sở hữu: {this.props.owner}</Text>
+                <Text style ={styles.text}>Room ID: {this.props.roomID}</Text>
+                <Text style ={styles.decription}>Owner: {this.props.owner}</Text>
               </View>
             </View>
 
@@ -46,7 +46,7 @@ export default class RoomInfo extends React.Component{
                     source ={require('../assets/images/icon_light.png')} ></Image>
                   </View>
                   <View style ={{flex: 5}}>
-                  <Text style ={styles.decription}>Số đèn đang bật: {this.props.lightOn} / {this.props.numOfLight}</Text>
+                  <Text style ={styles.decription}>Lights On: {this.props.lightOn} / {this.props.numOfLight}</Text>
                   </View>
                 </View>
               <View style={styles.specification}>
@@ -55,20 +55,20 @@ export default class RoomInfo extends React.Component{
                   source ={require('../../assets/images/icon_brightness.png')} ></Image>
                 </View>
                 <View style ={{flex: 5}}>
-                    <Text style ={styles.decription}>Độ sáng hiện tại: {this.props.brightness}</Text>
+                    <Text style ={styles.decription}>Brightness : {this.props.brightness}</Text>
                 </View>
               </View>
             </View>
 
             <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
               <TouchableOpacity style = {styles.button}>
-                    <Text style ={styles.title_button}>Cập nhật trạng thái</Text>
+                    <Text style ={styles.title_button}>Refresh</Text>
               </TouchableOpacity>
               
             </View>
             <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
               <TouchableOpacity style = {styles.button}>
-                    <Text style ={styles.title_button}>Chi tiết hệ thống đèn</Text>
+                    <Text style ={styles.title_button}>View detail</Text>
               </TouchableOpacity>
             </View>
             <Text style={styles.footer}>Phần mềm quản lý hệ thống chiếu sáng</Text>
@@ -85,19 +85,15 @@ export default class RoomInfo extends React.Component{
                           flex: 1,
                           justifyContent: 'center',
                           alignItems: 'center'}}>
-              <Text style={{
-                fontSize: 15,
-                marginTop: 30,
-                color: 'gold'
-              }}>Lần cập nhật cuối: {this.state.time}</Text>
+              <Text style={styles.header}>Last refreshed: {this.state.time}</Text>
             </View>
             <View style ={styles.user}>
               <View style={{flex:2,}}>
                 <Image style= {styles.big_icon} source = {require('../assets/images/icon_house.png')}/>
               </View>
               <View style ={{flex: 5}}>
-                <Text style ={styles.text}>Mã phòng: {this.props.roomID}</Text>
-                <Text style ={styles.text1}>Chủ sở hữu: {this.props.owner}</Text>
+                <Text style ={styles.text}>Room ID: {this.props.roomID}</Text>
+                <Text style ={styles.text1}>Owner: {this.props.owner}</Text>
               </View>
             </View>
 
@@ -108,7 +104,7 @@ export default class RoomInfo extends React.Component{
                     source ={require('../assets/images/icon_light.png')} ></Image>
                   </View>
                   <View style ={{flex: 5}}>
-                  <Text style ={styles.decription}>Số đèn đang bật: {this.props.lightOn} / {this.props.numOfLight}</Text>
+                  <Text style ={styles.decription}>Lights On: {this.props.lightOn} / {this.props.numOfLight}</Text>
                   </View>
                 </View>
               <View style={styles.specification}>
@@ -117,20 +113,20 @@ export default class RoomInfo extends React.Component{
                   source ={require('../assets/images/icon_brightness.png')} ></Image>
                 </View>
                 <View style ={{flex: 5}}>
-                    <Text style ={styles.decription}>Độ sáng hiện tại: {this.props.brightness}</Text>
+                    <Text style ={styles.decription}>Brightness: {this.props.brightness}</Text>
                 </View>
               </View>
             </View>
 
             <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
               <TouchableOpacity style = {styles.button}>
-                    <Text style ={styles.title_button}>Cập nhật trạng thái</Text>
+                    <Text style ={styles.title_button}>Refresh</Text>
               </TouchableOpacity>
               
             </View>
             <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
               <TouchableOpacity style = {styles.button}>
-                    <Text style ={styles.title_button}>Chi tiết hệ thống đèn</Text>
+                    <Text style ={styles.title_button}>View detail</Text>
               </TouchableOpacity>
             </View>
             <Text style={styles.footer}>Phần mềm quản lý hệ thống chiếu sáng</Text>
@@ -153,18 +149,18 @@ export default class RoomInfo extends React.Component{
     },
     text:{
       fontSize: 20*standarWidth/screenWidth,
-      color: 'gold',
+      color: '#1aaa1a',
       fontWeight:'bold'
     },
     text1:{
       fontSize: 16*standarWidth/screenWidth,
-      color: 'gold',
+      color: '#1aaa1a',
       fontWeight:'bold'
     },
 
     decription:{
         fontSize: 20*standarWidth/screenWidth,
-        color: 'gold',
+        color: '#1aaa1a',
     },
     image:{
         height : 20*standarWidth/screenWidth, 
@@ -180,12 +176,13 @@ export default class RoomInfo extends React.Component{
         justifyContent: "center",
     },
     button:{
-      alignItems: "center",
-      backgroundColor: "gold",
+      alignItems: 'center',
+      backgroundColor: '#1aaa1a',
       padding: 10*standarWidth/screenWidth, 
       borderRadius: 15, 
       width: 250*standarWidth/screenWidth},
-    user:{flex: 2,
+    user:{
+      flex: 2,
       flexDirection: 'row',
       margin: 10*standarWidth/screenWidth,
       justifyContent:'center',
@@ -215,6 +212,11 @@ export default class RoomInfo extends React.Component{
     },
     title_button:{
       color: 'white', 
-      fontSize: 16*standarWidth/screenWidth
+      fontSize: 18*standarWidth/screenWidth
+    },
+    header:{
+      fontSize: 15*standarWidth/screenWidth,
+      marginTop: 30*standarWidth/screenWidth,
+      color: 'white'
     }
   });
