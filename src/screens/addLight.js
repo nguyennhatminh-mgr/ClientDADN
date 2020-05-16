@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text ,TextInput,TouchableOpacity, StyleSheet, Button, Dimensions} from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const { width, height } = Dimensions.get('window');
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Items = ({type, placeholder}) => {
     return (
@@ -20,7 +20,7 @@ const Items = ({type, placeholder}) => {
 export default function AddSensorScreen({navigation}){
     return (
         <View style={Styles.listContainer}>
-
+            
         <View style={Styles.header}>
             <FontAwesome name="plus-circle" size={height/4} style={Styles.header_icon}/>
         </View>
