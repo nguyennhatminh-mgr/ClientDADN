@@ -4,7 +4,7 @@ import Home from '../screens/Home';
 import InHome from '../screens/InHome';
 import Profile from '../screens/Profile';
 import AddNavigator from './AddNavigator';
-import History from '../screens/HistoryOp';
+import History from './History';
 
 const Stack = createStackNavigator();
 

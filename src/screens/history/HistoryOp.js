@@ -4,24 +4,14 @@ import {View, Text ,TouchableOpacity, StyleSheet} from 'react-native';
 const Items = ({type,onClick}) => {
     return (
         <View style={Styles.blockItem}>
-            <TouchableOpacity onPress={onClick(type[0])}>
+            <TouchableOpacity onPress={onClick}>
                 <View style={Styles.item}>
-                    <Text >{type[0]}</Text>
+                    <Text >Room {type[0]}</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={onClick(type[1])}>
+            <TouchableOpacity onPress={onClick}>
                 <View style={Styles.item}>
-                    <Text>{type[1]}</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={onClick(type[2])}>
-                <View style={Styles.item}>
-                    <Text>{type[2]}</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={onClick(type[3])}>
-                <View style={Styles.item}>
-                    <Text>{type[3]}</Text>
+                    <Text>Room {type[1]}</Text>
                 </View>
             </TouchableOpacity>
         </View>
@@ -32,8 +22,10 @@ export default function HistoryOp({navigation}){
     return (
         <View style={Styles.listContainer}>
             <Text style={Styles.title}>List Room</Text>
-            <Items type={[1,2,3,4]} onClick={(room)=>navigation.navigate('ViewRoom')}></Items>
-            <Items type={[5,6,7,8]} onClick={(room)=>navigation.navigate('ViewRoom')}></Items>
+            <Items type={[1,2]} onClick={()=>navigation.navigate('Room')}></Items>
+            <Items type={[3,4]} onClick={()=>navigation.navigate('Room')}></Items>
+            <Items type={[5,6]} onClick={()=>navigation.navigate('Room')}></Items>
+            <Items type={[7,8]} onClick={()=>navigation.navigate('Room')}></Items>
         </View>
     );
 }
@@ -54,12 +46,12 @@ const Styles = StyleSheet.create({
         alignItems: 'center',
     },
     item:{
-        width:80,
-        height:80,
+        width: 100,
+        height: 100,
         borderWidth: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'grey',
+        backgroundColor: 'yellow',
     },
     blockItem:{
         flex: 2,
