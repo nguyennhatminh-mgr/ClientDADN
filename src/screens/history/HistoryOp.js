@@ -52,7 +52,7 @@ const Styles = StyleSheet.create({
         fontSize: 30,
         textAlign:'center',
         alignItems: 'center',
-        fontFamily:'Times New Roman'
+        // fontFamily:'Times New Roman'
     },
     
     blockItem:{

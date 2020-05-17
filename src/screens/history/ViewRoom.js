@@ -130,7 +130,7 @@ const styles=StyleSheet.create({
         textAlign: 'center',
         fontSize: 24, 
         fontWeight: 'bold',
-        fontFamily: 'Times New Roman',
+        // fontFamily: 'Times New Roman',
         color: 'blue',
     },
     element:{
