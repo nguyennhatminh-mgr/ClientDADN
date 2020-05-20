@@ -11,6 +11,8 @@ import AddNavigator from './AddNavigator';
 import History from './History';
 import SetLightLevel from '../screens/SetLightLevel';
 import AllRoom from '../screens/AllRoom';
+import ListRoom from '../screens/control_device/ListRoom';
+import ControlNavigator from './ControlNavigator';
 
 
 const Stack = createStackNavigator();
@@ -43,10 +45,14 @@ export default function HomeNavigator(){
             component={History}
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
 
-
             <Stack.Screen name="SetLightLevel"
             component={SetLightLevel}
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff",title:"SetLightLevel"}}/>
+        
+            <Stack.Screen name="Control" 
+            component={ControlNavigator}
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+
         </Stack.Navigator>
     );
 }
