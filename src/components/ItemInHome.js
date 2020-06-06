@@ -3,11 +3,11 @@ import {View,Text,TouchableOpacity,Image,StyleSheet} from 'react-native';
 
 export default class ItemInHome extends Component{
     render(){
-        const {image,title,screen} = this.props;
+        const {image,title,screen,id_user} = this.props;
         return (
             <TouchableOpacity activeOpacity={0.5} style={styles.container}
             onPress={() => {
-                this.props.navigation.navigate(screen);
+                this.props.navigation.navigate(screen,{id_user: id_user});
             }}>
                 <View style={styles.rowinhomeitem}>
                     <Image style={styles.rowinhomeitemimg} source={image}/>

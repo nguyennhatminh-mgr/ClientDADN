@@ -7,22 +7,26 @@ import add_device from '../assets/images/add_device.png';
 import room_info from '../assets/images/room_info.jpg';
 import control_device from '../assets/images/control_device.jpg';
 import history from '../assets/images/history.jpg';
+import * as Constant from '../constant/Constant';
 
-export default function Home({navigation}){
+export default function Home({navigation,route}){
+
+    const {id_user} = route.params; 
+
     return (
         <ScrollView style={styles.container}>
             <View style={styles.rowinhome}>
-                <ItemInHome navigation={navigation} screen="Control" image={control_device} title="Control device"/>
-                <ItemInHome navigation={navigation} screen="History" image={history} title="View history"/>
+                <ItemInHome id_user={id_user} navigation={navigation} screen="Control" image={control_device} title="Control device"/>
+                <ItemInHome id_user={id_user} navigation={navigation} screen="History" image={history} title="View history"/>
             </View>
 
             <View style={styles.rowinhome}>
-                <ItemInHome navigation={navigation} screen="AddObject" image={add_device} title="Add device"/>
-                <ItemInHome navigation={navigation} screen="AllRoom" image={room_info} title="View room"/>
+                <ItemInHome id_user={id_user} navigation={navigation} screen="AddObject" image={add_device} title="Add device"/>
+                <ItemInHome id_user={id_user} navigation={navigation} screen="AllRoom" image={room_info} title="View room"/>
             </View>
             <View style={styles.rowinhome}>
-                <ItemInHome navigation={navigation} screen="SetLightLevel" image={setting_image} title="Set light level"/>
-                <ItemInHome navigation={navigation} screen="Profile" image={user_info} title="User Info"/>
+                <ItemInHome id_user={id_user} navigation={navigation} screen="SetLightLevel" image={setting_image} title="Set light level"/>
+                <ItemInHome id_user={id_user} navigation={navigation} screen="Profile" image={user_info} title="User Info"/>
             </View>
         </ScrollView>
 
