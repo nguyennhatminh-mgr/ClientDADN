@@ -1,8 +1,10 @@
 import React from 'react';
-import {View, Text ,TextInput,TouchableOpacity, StyleSheet, Button, Dimensions} from 'react-native';
+import {View, Text, Alert,TextInput,TouchableOpacity, StyleSheet, Button, Dimensions} from 'react-native';
 const { width, height } = Dimensions.get('window');
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Items from '../components/AddItems';
+import axios from 'axios';
+import * as ConstantURL from '../constant/Constant';
 
 export default class AddSensorScreen extends React.Component{
     constructor(props) {
@@ -28,6 +30,29 @@ export default class AddSensorScreen extends React.Component{
         }
         //console.log(this.state)
     }
+
+    addLightAction =()=>{
+        var body = {id:'', type:'', id_room:''};
+        if(this.state.type=='' || this.state.Id == '' || this.state.Room == '' ){
+            Alert.alert('warning','fill in form!');
+            return;
+        }else{
+            body.id = this.state.Id;
+            body.type= this.state.type;
+            body.id_room = this.state.Room;
+        }
+        //console.log(body);
+        axios.post(`${ConstantURL.IP_URL}${ConstantURL.ADD_DIVICE_URL}`,body).then((response) => {
+            if(response.data === "ok"){
+                Alert.alert('congratulations','add light successfully!');
+            }
+            else{
+                Alert.alert('fail','ID already exist!');;
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
     
     render(){
         return (
@@ -46,6 +71,7 @@ export default class AddSensorScreen extends React.Component{
                 <View style={Styles.btnContainer}>
                     <View style={Styles.btn}>
                         <Button
+                        onPress={this.addLightAction}
                         title="Save"
                         color="#841584"
                         accessibilityLabel="add new Sensor to database"

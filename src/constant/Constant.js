@@ -7,3 +7,7 @@ export const USERNAME_EXIST_URL = '/users/usernameexist';
 export const LIST_ROOM_NOT_OWNER = '/users/listroomnotowner';
 export const SIGNUP_URL = '/users/signup';
 export const USER_INFO_URL = '/users/info';
+
+//addObj
+export const ADD_ROOM_URL = '/addRoom';
+export const ADD_DIVICE_URL = '/addDevice';
