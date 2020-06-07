@@ -71,7 +71,7 @@ const Styles = StyleSheet.create({
     },
     listItem:{
         flex:6,
-        backgroundColor:"#9dc6a7",
+        backgroundColor:"#fff",
         alignItems:"center",
         justifyContent:"space-evenly"
 
