@@ -2,57 +2,69 @@ import React from 'react';
 import {View, Text ,TextInput,TouchableOpacity, StyleSheet, Button, Dimensions} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const { width, height } = Dimensions.get('window');
+import Items from '../components/AddItems';
 
-const Items = ({type, placeholder}) => {
-    return (
-        <View style={Styles.rowInfo}>
-                    <Text style={Styles.row_1_Info}>{type}</Text>
-                    <TextInput 
-                        style={Styles.row_2_Info}
-                        placeholder={placeholder}
-                        placeholderTextColor="#000"
-                        fontSize={height/30}
-                    ></TextInput>
-        </View>
-    );
-}
+export default class AddSensorScreen extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            type:'sensor',
+            Id:'',
+            Room:'',
+        }
+    }
 
-export default function AddSensorScreen({navigation}){
-    return (
-        <View style={Styles.listContainer}>
-
-        <View style={Styles.header}>
-            <FontAwesome name="plus-circle" size={height/4} style={Styles.header_icon}/>
-        </View>
-
-        <View style={Styles.body}>  
-            <View style={Styles.Info}>
-                <Items type={"Building"} placeholder={"H6"}/>
-                <Items type={"Room"} placeholder={"710"}/>
-                <Items type={"ID"} placeholder={"1"}/>
+    setText = (textParam, type)=>{
+        switch(type){
+            case "Id":
+                this.setState({
+                    Id: textParam
+                });
+                break;
+            case "Room" :
+                this.setState({
+                    Room: textParam
+                });
+        }
+        //console.log(this.state)
+    }
+    
+    render(){
+        return (
+            <View style={Styles.listContainer}>
+    
+            <View style={Styles.header}>
+                <FontAwesome name="plus-circle" size={height/4} style={Styles.header_icon}/>
             </View>
-
-            <View style={Styles.btnContainer}>
-                <View style={Styles.btn}>
-                    <Button
-                    title="Save"
-                    color="#841584"
-                    accessibilityLabel="add new Sensor to database"
-                    />
+    
+            <View style={Styles.body}>  
+                <View style={Styles.Info}>
+                    <Items type={"Id"} placeholder={"S1"} setText={this.setText}/>
+                    <Items type={"Room"} placeholder={"101H6"} setText={this.setText}/>
                 </View>
-                
-                <View style={Styles.btn}>
-                    <Button
-                        onPress={()=>navigation.replace("AddMenu")}
-                        title="Cancle"
+    
+                <View style={Styles.btnContainer}>
+                    <View style={Styles.btn}>
+                        <Button
+                        title="Save"
                         color="#841584"
-                        accessibilityLabel="leave this screen without Save"
-                    />
+                        accessibilityLabel="add new Sensor to database"
+                        />
+                    </View>
+                    
+                    <View style={Styles.btn}>
+                        <Button
+                            onPress={()=>this.props.navigation.replace("AddMenu")}
+                            title="Cancle"
+                            color="#841584"
+                            accessibilityLabel="leave this screen without Save"
+                        />
+                    </View>
                 </View>
-            </View>
-        </View> 
-    </View>
-    );
+            </View> 
+        </View>
+        );
+    }
 }
 
 const Styles = StyleSheet.create({
