@@ -7,7 +7,7 @@ const Stack = createStackNavigator();
 
 export default function ViewHistory(){
     return(
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="History">
             <Stack.Screen name="History" 
             component={History}
             options={{headerShown:false}}/>

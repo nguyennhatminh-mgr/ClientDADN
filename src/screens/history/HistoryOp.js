@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {View, Text ,TouchableOpacity,ScrollView, StyleSheet} from 'react-native';
+import { render } from 'react-dom';
+import * as ConstantURL from '../../constant/Constant';
+import Axios from 'axios';
 
 const Items = ({name,id,owner,onClick}) => {
     return (
@@ -13,31 +16,51 @@ const Items = ({name,id,owner,onClick}) => {
     );
 }
 
-export default function HistoryOp({navigation}){
-    return (
-        <ScrollView style={Styles.listContainer}>
-            <Text style={Styles.title}>List Room</Text>
-            <View style={Styles.container}>
-                <Items name={101} id={1} owner={'A'} onClick={()=>navigation.navigate('Room')}></Items>
-                <Items name={102} id={2} owner={'B'} onClick={()=>navigation.navigate('Room')}></Items>
-            </View>
+export default class HistoryOp extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            listRoom : [],
+        }
+    }
 
-            <View style={Styles.container}>
-                <Items name={103} id={3} owner={'C'} onClick={()=>navigation.navigate('Room')}></Items>
-                <Items name={104} id={4} owner={'D'} onClick={()=>navigation.navigate('Room')}></Items>
-            </View>
+    componentDidMount(){
+        Axios.get(`${ConstantURL.IP_URL}${ConstantURL.VIEW_HISTORY_URL}`).then((res) => {
+            this.setState({
+                listRoom: res.data
+            });
+        }).catch((error) =>{
+            console.log(error);
+        })
+    }
 
-            <View style={Styles.container}>
-                <Items name={105} id={5} owner={'A'} onClick={()=>navigation.navigate('Room')}></Items>
-                <Items name={106} id={6} owner={'B'} onClick={()=>navigation.navigate('Room')}></Items>
-            </View>
 
-            <View style={Styles.container}>
-                <Items name={107} id={7} owner={'C'} onClick={()=>navigation.navigate('Room')}></Items>
-                <Items name={108} id={8} owner={'D'} onClick={()=>navigation.navigate('Room')}></Items>
-            </View>
-        </ScrollView>
-    );
+    render() {
+        const {navigation} = this.props;
+                    let data = {
+                        idRoom: '',
+                        name: '',
+                        owner: '',
+                    }
+        return(
+            <ScrollView style={Styles.listContainer}>
+                <Text style={Styles.title}>List Room</Text>
+                {
+                    
+                    this.state.listRoom.map(item =>(
+                        <View style={Styles.container} key={item.id}>
+                            <Items name={item.name} id={item.id} owner={item.owner} onClick={()=>{
+                                data.idRoom = item.id;
+                                data.name = item.name;
+                                data.owner = item.owner;
+                                navigation.navigate("Room",data);
+                            }}></Items>
+                        </View>
+                    ))
+                }
+            </ScrollView>
+        );
+    }
 }
 
 const Styles = StyleSheet.create({

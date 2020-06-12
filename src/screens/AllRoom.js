@@ -8,14 +8,13 @@ export default class AllRoom extends React.Component{
         super(props);
     }
     render(){
-        return (   
+        return (
             <ScrollView horizontal = {true} pagingEnabled ={true}>
                 {
                     roomList.map(
                         (item, index)=> (<RoomInfo key ={index} roomID = {item.roomID} owner ={item.owner} lightOn ={item.lightOn} numOfLight ={item.numOfLight} brightness = {item.brightness}/>
                     ))
                 }
-                
             </ScrollView>
         );
     }
