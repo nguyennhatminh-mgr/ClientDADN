@@ -1,59 +1,105 @@
 import React from 'react';
-import {View, Text ,TextInput,TouchableOpacity, StyleSheet, Button, Dimensions} from 'react-native';
+import {View, Text, Alert ,TextInput,TouchableOpacity, StyleSheet, Button, Dimensions} from 'react-native';
 const { width, height } = Dimensions.get('window');
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Items from '../components/AddItems';
+import axios from 'axios';
+import * as ConstantURL from '../constant/Constant';
 
-const Items = ({type, placeholder}) => {
-    return (
-        <View style={Styles.rowInfo}>
-                    <Text style={Styles.row_1_Info}>{type}</Text>
-                    <TextInput 
-                        style={Styles.row_2_Info}
-                        placeholder={placeholder}
-                        placeholderTextColor="#000"
-                        fontSize={height/30}
-                    ></TextInput>
-        </View>
-    );
-}
 
-export default function AddSensorScreen({navigation}){
-    return (
-        <View style={Styles.listContainer}>
+export default class AddSensorScreen extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            adminRoom:'',
+            Id:'',
+            Name:'',
+        }
+    }
 
-        <View style={Styles.header}>
-        <FontAwesome name="plus-circle" size={height/4} style={Styles.header_icon}/>
-        </View>
+    setText = (textParam, type)=>{
+        switch(type){
+            // case "AdminRoom":
+            //     this.setState({
+            //         adminRoom: textParam
+            //     });
+            //     break;
+            case "ID" :
+                this.setState({
+                    Id: textParam
+                });
+                break;
+            case "Name":
+                this.setState({
+                    Name: textParam
+                });
+                break;
+        }
+        //console.log(this.state)
+    }
 
-        <View style={Styles.body}>  
-            <View style={Styles.Info}>
-                <Items type={"Admin Room"} placeholder={"Ngo Ba Kha"}/>
-                <Items type={"Admin Building"} placeholder={"Nguyen Van A"}/>
-                <Items type={"ID"} placeholder={"1"}/>
+    addRoomAction =()=>{
+        var body = {id:'', name:''};
+        if(this.state.Id=='' || this.state.Name == ''){
+            Alert.alert('warning','fill in form!');
+            return;
+        }else{
+            body.id = this.state.Id;
+            body.name= this.state.Name;
+        }
+        //console.log(body);
+        axios.post(`${ConstantURL.IP_URL}${ConstantURL.ADD_ROOM_URL}`,body).then((response) => {
+            if(response.data === "ok"){
+                Alert.alert('congratulations','add room successfully!');
+            }
+            else{
+                Alert.alert('fail','ID already exist!');;
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+    
+    render(){
+        return (
+            <View style={Styles.listContainer}>
+    
+            <View style={Styles.header}>
+            <FontAwesome name="plus-circle" size={height/4} style={Styles.header_icon}/>
             </View>
-
-            <View style={Styles.btnContainer}>
-                <View style={Styles.btn}>
-                    <Button
-                    title="Save"
-                    color="#841584"
-                    accessibilityLabel="add new Room to database"
-                    />
+    
+            <View style={Styles.body}>  
+                <View style={Styles.Info}>
+                    {/* <Items type={"AdminRoom"} placeholder={"Ngo Ba Kha"} setText={this.setText}/> */}
+                    <Items type={"ID"} placeholder={"R1"} setText={this.setText}/>
+                    <Items type={"Name"} placeholder={"101H6"} setText={this.setText}/>
                 </View>
-                
-                <View style={Styles.btn}>
-                    <Button
-                        onPress={()=>navigation.replace("AddMenu")}
-                        title="Cancle"
+    
+                <View style={Styles.btnContainer}>
+                    <View style={Styles.btn}>
+                        <Button
+                        onPress={this.addRoomAction}
+                        title="Save"
                         color="#841584"
-                        accessibilityLabel="leave this screen without Save"
-                    />
+                        accessibilityLabel="add new Room to database"
+                        />
+                    </View>
+                    
+                    <View style={Styles.btn}>
+                        <Button
+                            onPress={()=>this.props.navigation.replace("AddMenu")}
+                            title="Cancle"
+                            color="#841584"
+                            accessibilityLabel="leave this screen without Save"
+                        />
+                    </View>
                 </View>
-            </View>
-        </View> 
-    </View>
-    );
+            </View> 
+        </View>
+        );
+    }
 }
+
 
 const Styles = StyleSheet.create({
     listContainer:{
@@ -74,7 +120,7 @@ const Styles = StyleSheet.create({
         shadowOffset: {width:2, height:2},
         elevation: 6,
     },
-      body:{
+    body:{
         flex:6,
         backgroundColor:"#9dc6a7",
       },
