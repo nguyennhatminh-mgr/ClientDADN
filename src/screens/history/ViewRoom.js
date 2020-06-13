@@ -4,6 +4,10 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
 import Axios from 'axios';
 import * as ConstantURL from '../../constant/Constant';
+import HistoryChar from '../../components/HistoryChart';
+
+
+
 
 const Lamps=({id,mode})=>{
     return (
@@ -59,6 +63,7 @@ export default class ViewRoom extends Component{
             this.setState({
                 lamp: res.data,
             })
+            console.log(this.state.lamp);
         }).catch((error)=>{
             console.log(error);
         })
@@ -82,10 +87,11 @@ export default class ViewRoom extends Component{
     handlePicker = async (datetime) => {
         await this.setState({
             isVisible: false,
-            chosenDate: moment(datetime).format('YYYY-MM-DD HH:mm')   
+            chosenDate: moment(datetime).format('YYYY-MM-DD HH:mm:ss')
         })
-        //await console.log(this.state.chosenDate);
-        await this.getLight();
+        // await console.log(this.state.chosenDate);
+        // await console.log(this.props.route.params.idRoom);
+        await this.getLight();     
         await this.getSensor();
     }
 
@@ -135,6 +141,7 @@ export default class ViewRoom extends Component{
                         }
                     </View>
                 </View>
+                {HistoryChar()}
             </ScrollView>
         )
     }
