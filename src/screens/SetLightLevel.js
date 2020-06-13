@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import {View,Text,StyleSheet,TouchableOpacity} from 'react-native';
+import {View,Text,StyleSheet,TouchableOpacity, Alert} from 'react-native';
 import {Slider} from 'react-native-elements';
 import {PieChart} from 'react-native-chart-kit';
 import { Dimensions } from 'react-native';
+import axios from 'axios';
+
+import * as Constant from '../constant/Constant';
 
 const MAX_LIGHT_LEVEL = 400;
 const COMFORTABLE_LIGHT_LEVEL = 200;
 const DANGER_LIGHT_LEVEL = 300;
 const STEP_LIGHT_LEVEL = 1;
 const {width} = Dimensions.get("window");
+const SET_SUCCESS = 'SET_SUCCESS';
 
 const chartConfig = {
     backgroundGradientFrom: "#1E2923",
@@ -67,6 +71,26 @@ export default class extends Component {
             data: data
         });
     }
+
+    handleSet = (light_level) => {
+        axios.get(`${Constant.IP_URL}${Constant.SET_LIGHT_LEVEL}${light_level}`)
+        .then((response) => {
+            if(response.data === SET_SUCCESS){
+                Alert.alert("Set light level success");
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
+    componentDidMount() {
+        axios.get(`${Constant.IP_URL}${Constant.GET_CURRENT_LIGHT_LEVEL}`)
+        .then((response) => {
+            this.isValueChange(response.data[0].value);
+        })
+    }
+    
     
     render(){
         const {light_level,data} = this.state;
@@ -102,10 +126,19 @@ export default class extends Component {
                 </View>
                 <View style={styles.wrap_btn_set}>
                     <View style={{flexDirection:"row",justifyContent:"center"}}>
-                        <TouchableOpacity activeOpacity={0.5} style={styles.btn_set}>
+                        <TouchableOpacity activeOpacity={0.5} style={styles.btn_set}
+                        onPress={() => {
+                            this.handleSet(this.state.light_level);
+                        }}>
                             <Text style={{color:"#fff"}}>Set</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity activeOpacity={0.5} style={styles.btn_set}>
+                        <TouchableOpacity activeOpacity={0.5} style={styles.btn_set}
+                        onPress={() => {
+                            this.handleSet(COMFORTABLE_LIGHT_LEVEL);
+                            this.setState({
+                                light_level: COMFORTABLE_LIGHT_LEVEL
+                            });
+                        }}>
                             <Text style={{color:"#fff"}}>Default</Text>
                         </TouchableOpacity>
                     </View>
