@@ -87,7 +87,7 @@ export default class AddSensorScreen extends React.Component{
                     
                     <View style={Styles.btn}>
                         <Button
-                            onPress={()=>this.props.navigation.replace("AddMenu")}
+                            onPress={()=>this.props.navigation.navigate("AddObject")}
                             title="Cancle"
                             color="#841584"
                             accessibilityLabel="leave this screen without Save"
@@ -160,9 +160,9 @@ const Styles = StyleSheet.create({
           alignItems:"center"
       },
       btn:{
-        width:"30%",
-        height:"30%",
+        width:"40%",
+        height:"35%",
         borderRadius:20,
-        
+        backgroundColor:"lightblue",
       }
 })
