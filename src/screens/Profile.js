@@ -49,18 +49,40 @@ export default class Profile extends Component{
                             <FontAweSome name="user" size={30} color="#006600"/>
                         </View>
                         <Text style={styles.profile_row_text}>{this.state.username}</Text>
+                        <TouchableOpacity style={styles.profile_row_wrap_font} activeOpacity={0.5}
+                        onPress={() => {
+                            var dataEdit = {};
+                            dataEdit.id = this.props.route.params.id_user;
+                            dataEdit.realname = this.state.realname;
+                            dataEdit.username = this.state.username;
+                            this.props.navigation.navigate("EditProfile",{dataEdit: dataEdit});
+                        }}>
+                            <FontAweSome name="edit" size={24} color="#3180c2"/>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.profile_row}>
                         <View style={styles.profile_row_wrap_font}>
                             <FontAweSome name="unlock-alt" size={30} color="#006600"/>
                         </View>
                         <Text style={styles.profile_row_text}>Password</Text>
+                        <TouchableOpacity style={styles.profile_row_wrap_font} activeOpacity={0.5}
+                        onPress={() => {
+                            this.props.navigation.navigate("ChangePassword",{id: this.props.route.params.id_user});
+                        }}>
+                            <FontAweSome name="edit" size={24} color="#3180c2"/>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.profile_row}>
                         <View style={styles.profile_row_wrap_font}>
                             <FontAweSome name="address-book" size={24} color="#006600"/>
                         </View>
                         <Text style={styles.profile_row_text}>{this.state.typeofuser}</Text>
+                        <TouchableOpacity style={styles.profile_row_wrap_font} activeOpacity={0.5}
+                        onPress={() => {
+                            
+                        }}>
+                            <FontAweSome name="edit" size={24} color="#3180c2"/>
+                        </TouchableOpacity>
                     </View>
                     <TouchableOpacity style={styles.profile_row} activeOpacity={0.5}
                     onPress={() => {
@@ -72,7 +94,12 @@ export default class Profile extends Component{
                         </View>
                         <Text style={styles.profile_row_text}>Log out</Text>
                     </TouchableOpacity>
-                    
+                    {/* <TouchableOpacity style={styles.btn_edit} activeOpacity={0.5}
+                    onPress={() => {
+                        this.props.navigation.navigate("EditProfile");
+                    }}>
+                        <Text style={styles.btn_edit_text}>EDIT</Text>
+                    </TouchableOpacity> */}
                 </View>
             </View>
         );
@@ -121,5 +148,16 @@ const styles = StyleSheet.create({
     },
     profile_row_text: {
         flex: 6
+    },
+    btn_edit: {
+        marginVertical: 16,
+        marginHorizontal: 60
+    },
+    btn_edit_text: {
+        textAlign: "center",
+        backgroundColor: "#1aaa1a",
+        color: "#fff",
+        borderRadius: 4,
+        paddingVertical: 8
     }
 });

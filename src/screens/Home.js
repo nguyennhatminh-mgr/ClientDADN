@@ -16,7 +16,7 @@ export default function Home({navigation,route}){
     return (
         <ScrollView style={styles.container}>
             <View style={styles.rowinhome}>
-                <ItemInHome id_user={id_user} navigation={navigation} screen="Control" image={control_device} title="Control device"/>
+                <ItemInHome id_user={id_user} navigation={navigation} screen="ListRoomControl" image={control_device} title="Control device"/>
                 <ItemInHome id_user={id_user} navigation={navigation} screen="History" image={history} title="View history"/>
             </View>
 

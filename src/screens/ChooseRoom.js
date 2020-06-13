@@ -37,7 +37,7 @@ function ChooseRoom({route,navigation}) {
         .then((response) => {
             if(response.data === SUCCESS){
                 navigation.popToTop();
-                navigation.navigate("Login");
+                navigation.replace("Login");
             }
         })
         .catch((error) => {

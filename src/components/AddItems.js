@@ -7,14 +7,19 @@ export default class Items extends React.Component {
     render(){
         return (<View style={Styles.rowInfo}>
             <Text style={Styles.row_1_Info}>{this.props.type}</Text>
-            <TextInput 
-                style={Styles.row_2_Info} 
-                placeholder={this.props.placeholder} 
-                onChangeText={textParam => this.props.setText(textParam, this.props.type)}
-                placeholderTextColor="#000" 
-                fontSize={height / 30}
-            >
-            </TextInput>
+            {
+                (this.props.type === "ID" || this.props.type === "Name")?
+                    <TextInput 
+                        style={Styles.row_2_Info} 
+                        placeholder={this.props.placeholder} 
+                        onChangeText={textParam => this.props.setText(textParam, this.props.type)}
+                        placeholderTextColor="#000" 
+                        fontSize={height / 30}
+                    >
+                    </TextInput>
+                :
+                <Text style={Styles.roomInfo}>{this.props.room_id}</Text>
+            }
         </View>);
     };
 }
@@ -37,6 +42,10 @@ const Styles = StyleSheet.create({
       height:"50%",
       fontSize:height / 10,
       color:"#000",
+    },
+    roomInfo:{
+        color:"#000",
+        fontSize:height / 25,
     }
 })
 
