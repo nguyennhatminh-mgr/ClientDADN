@@ -11,7 +11,8 @@ const RoomItems = ({obj, setRoom})=>{
     return (
         <TouchableOpacity 
         onPress={()=>{
-            setRoom(obj.id);
+            console.log(obj)
+            setRoom(obj.id_room);
         }}
         >
             <View style={Styles.roomItem}>
