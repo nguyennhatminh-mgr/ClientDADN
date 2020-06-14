@@ -29,7 +29,7 @@ export default class AddSensorScreen extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            listRoom:[],
+            listRoom:[{id_room:""}],
             type:'light',
             Id:'',
             Room:'',
@@ -108,7 +108,7 @@ export default class AddSensorScreen extends React.Component{
                 )}
                 
                 numColumns={2}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item.id_room}
                 />
                
             </View>

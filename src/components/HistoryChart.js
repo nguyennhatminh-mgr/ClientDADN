@@ -5,29 +5,31 @@ import {
     LineChart,
   } from "react-native-chart-kit";
 
-export default function HistoryChar(){
+export default function HistoryChar(mylabel, mydataset){
+    if(mylabel == null || mydataset == null){
+        mylabel = ["00"];
+        mydataset = [0];
+    }
+    if(mydataset.length == 0 || mylabel.length == 0){
+        mylabel = ["00"];
+        mydataset = [0];
+    }
     return (
         <View>
-            <Text>Light History</Text>
+            <Text style={{fontWeight:"bold"}}>Chart History</Text>
             <ScrollView horizontal={true}>         
             <View>
                 <LineChart
+                    verticalLabelRotation={0}
                     data={{
-                    labels: ["01:01:01","12:20:01", "12:20:30", "01:01:01", "01:01:01", "01:01:01"],
+                    labels: mylabel ,
                     datasets: [
                         {
-                        data: [
-                            Math.random() * 255,
-                            Math.random() * 255,
-                            Math.random() * 255,
-                            Math.random() * 255,
-                            Math.random() * 255,
-                            Math.random() * 255
-                        ]
+                        data: mydataset
                         }
                     ]
                     }}
-                    width={Dimensions.get("window").width * 2 } // from react-native
+                    width={Dimensions.get("window").width} // from react-native
                     height={220}
                     // yAxisLabel="$"
                     // yAxisSuffix="k"
@@ -49,6 +51,7 @@ export default function HistoryChar(){
                     }
                     }}
                     //bezier
+                    
                     style={{
                     marginVertical: 8,
                     borderRadius: 16
