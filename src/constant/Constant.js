@@ -26,4 +26,5 @@ export const ADD_DIVICE_URL = '/addDevice';
 export const VIEW_HISTORY_URL = '/viewHistory';
 export const VIEW_SENSOR_HISTORY_URL = '/viewSensorHistory';
 export const VIEW_LIGHT_HISTORY_URL = '/viewLightHistory';
+export const GET_DATA_HISTORY_URL = '/getDataHistory';
 

@@ -1,44 +1,25 @@
 import React,{Component} from 'react';
-import { View ,Text ,ScrollView,TouchableOpacity, StyleSheet} from 'react-native';
+import { Alert ,View ,Text ,ScrollView,TouchableOpacity, StyleSheet} from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
 import Axios from 'axios';
 import * as ConstantURL from '../../constant/Constant';
 import HistoryChar from '../../components/HistoryChart';
+import { FlatList } from 'react-native-gesture-handler';
 
 
 
 
-const Lamps=({id,mode})=>{
+const Lamps=({id, getValue})=>{
     return (
     <View style={styles.element}>
-        <View>
+        <TouchableOpacity
+        onPress = {()=>{ getValue(id)}}
+        >
             <Text style={{fontSize: 20}}>
                 {id}
             </Text>
-        </View>
-        <View>
-            <Text style={{fontSize:20,color:'green',}}>
-                {mode}
-            </Text>
-        </View>
-    </View>
-    )
-}
-
-const Sensors=({id,mode})=>{
-    return (
-    <View style={styles.element}>
-        <View>
-            <Text style={{fontSize: 20}}>
-                {id}
-            </Text>
-        </View>
-        <View>
-            <Text style={{fontSize: 20,color:'green',}}>
-                {mode}
-            </Text>
-        </View>
+        </TouchableOpacity>
     </View>
     )
 }
@@ -51,7 +32,21 @@ export default class ViewRoom extends Component{
             chosenDate: '',
             lamp : [],
             sensor : [],
+            chartLabel:["10:10:10", "12:12:21", "13:14:15", "15:16:17:", "18:19:20", "19:20:20"],
+            chartDataset:[
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100
+              ],
         }
+    }
+
+    componentDidMount(){
+        this.getLight();
+        this.getSensor();
     }
 
     getLight = () => {
@@ -63,7 +58,6 @@ export default class ViewRoom extends Component{
             this.setState({
                 lamp: res.data,
             })
-            console.log(this.state.lamp);
         }).catch((error)=>{
             console.log(error);
         })
@@ -87,12 +81,8 @@ export default class ViewRoom extends Component{
     handlePicker = async (datetime) => {
         await this.setState({
             isVisible: false,
-            chosenDate: moment(datetime).format('YYYY-MM-DD HH:mm:ss')
+            chosenDate: moment(datetime).format('YYYY-MM-DD')
         })
-        // await console.log(this.state.chosenDate);
-        // await console.log(this.props.route.params.idRoom);
-        await this.getLight();     
-        await this.getSensor();
     }
 
     showPicker = () => {
@@ -107,9 +97,25 @@ export default class ViewRoom extends Component{
         })
     }
 
+    getDataSet = (id_device_Param)=>{
+        if(this.state.chosenDate === '') {
+            Alert.alert('Select Date please !');
+            return;
+        }
+        Axios.get(`${ConstantURL.IP_URL}${ConstantURL.GET_DATA_HISTORY_URL}`+"/"+`${id_device_Param}`+"/"+`${this.state.chosenDate}`)
+        .then((res) => {
+            this.setState({
+                chartDataset: res.data.map(item => item.value),
+                chartLabel: res.data.map(item => new Date(item.time).toTimeString().split(' ')[0]),
+            })
+        }).catch((error)=>{
+            console.log(error);
+        })
+    }
+
     render(){
         return(
-            <ScrollView>
+            <View style={styles.container}>
                 <View style={styles.calender}>
                     <TouchableOpacity style={styles.button} onPress={this.showPicker}>
                         <Text style={styles.text}>Select Date</Text>
@@ -126,36 +132,62 @@ export default class ViewRoom extends Component{
                 <View style={styles.container_content}>
                     <View style={styles.list}>
                         <Text style={styles.title}>Lamp</Text>
-                        {
-                            this.state.lamp.map(item => {
-                                <Lamps id={item.id} mode={item.value}></Lamps>
-                            })
-                        }
+                        <FlatList                          
+                            data={this.state.lamp}
+                            renderItem={({ item }) => (
+                                <Lamps
+                                id={item.id}
+                                getValue={this.getDataSet}
+                                />
+                            )}
+                            numColumns={1}
+                            keyExtractor={item => item.id}
+                        />
                     </View>
                     <View style={styles.list}>
                         <Text style={styles.title}>Sensor</Text>
-                        {        
-                            this.state.sensor.map(item => {
-                                <Sensors id={item.id} mode={item.value}></Sensors>
-                            })              
-                        }
+                        <FlatList                          
+                            data={this.state.sensor}
+                            renderItem={({ item }) => (
+                                <Lamps
+                                id={item.id}
+                                getValue={this.getDataSet}
+                                />
+                            )}
+                            numColumns={1}
+                            keyExtractor={item => item.id}
+                        />
                     </View>
                 </View>
-                {HistoryChar()}
-            </ScrollView>
+                <View style={styles.chartView}>
+                {HistoryChar(this.state.chartLabel, this.state.chartDataset)}
+                </View>
+                
+            </View>
         )
     }
 }
 
 
 const styles=StyleSheet.create({
+    container:{
+        flex:1,
+        justifyContent:"space-around",
+    },
+    calender:{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center',
+    },
     container_content:{
         paddingTop: '5%',
-        flex:1,
+        flex:2,
         flexDirection: 'row',
         justifyContent: 'space-around',
     },
-
+    chartView:{
+        flex:6
+    },
     list:{
         flex:1,
         width: '100%',
@@ -170,7 +202,6 @@ const styles=StyleSheet.create({
         textAlign: 'center',
         fontSize: 24, 
         fontWeight: 'bold',
-        // fontFamily: 'Times New Roman',
         color: 'blue',
     },
     element:{
@@ -188,10 +219,7 @@ const styles=StyleSheet.create({
         justifyContent: 'center',
         marginTop: 15,
     },
-    calender:{
-        justifyContent:'center',
-        alignItems:'center',
-    },
+    
     text:{
         fontSize:18,
         color: 'white',
