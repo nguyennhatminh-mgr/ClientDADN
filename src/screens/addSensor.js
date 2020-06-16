@@ -5,15 +5,44 @@ const { width, height } = Dimensions.get('window');
 import Items from '../components/AddItems';
 import axios from 'axios';
 import * as ConstantURL from '../constant/Constant';
+import { ScrollView, FlatList } from 'react-native-gesture-handler';
+
+const RoomItems = ({obj, setRoom})=>{
+    return (
+        <TouchableOpacity 
+        onPress={()=>{
+            setRoom(obj.id_room,"Room");
+        }}
+        >
+            <View style={Styles.roomItem}>
+                <Text style={Styles.textRoom}>
+                    {obj.name}
+                </Text>
+            </View>
+        </TouchableOpacity>
+    );
+}
 
 export default class AddSensorScreen extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            listRoom:[{id_room:""}],
             type:'sensor',
             Id:'',
             Room:'',
         }
+    }
+
+    componentDidMount(){
+        this._isMounted = true;
+        axios.get(`${ConstantURL.IP_URL}/listroomcontrol/${this.props.route.params.id_user}`).then((res) => {
+            this.setState({
+                listRoom: res.data
+            });
+        }).catch((error) =>{
+            console.log(error);
+        })
     }
 
     setText = (textParam, type)=>{
@@ -28,7 +57,6 @@ export default class AddSensorScreen extends React.Component{
                     Room: textParam
                 });
         }
-        //console.log(this.state)
     }
     
     addSensorAction =()=>{
@@ -57,35 +85,48 @@ export default class AddSensorScreen extends React.Component{
     render(){
         return (
             <View style={Styles.listContainer}>
-    
+                
             <View style={Styles.header}>
-                <FontAwesome name="plus-circle" size={height/4} style={Styles.header_icon}/>
+                <Text style={{fontSize:(height/100*30) /7 , fontWeight:"bold",marginVertical:"7%"}}>Select Room</Text>
+                <FlatList
+                style={{marginBottom:"4%",borderWidth:2 ,borderBottomColor:"#000"}}
+                data={this.state.listRoom}
+                renderItem={({ item }) => (
+                <RoomItems
+                    obj = {item}
+                    setRoom={this.setText}
+                />
+                )}
+                
+                numColumns={2}
+                keyExtractor={item => item.id_room}
+                />
+               
             </View>
     
             <View style={Styles.body}>  
                 <View style={Styles.Info}>
-                    <Items type={"Id"} placeholder={"S1"} setText={this.setText}/>
-                    <Items type={"Room"} placeholder={"101H6"} setText={this.setText}/>
+                    <Items type={"Room ID"} placeholder={"201h1"} setText={this.setText} room_id={this.state.Room}/>
+                    <Items type={"ID"} placeholder={"S1"} setText={this.setText}/>
                 </View>
     
                 <View style={Styles.btnContainer}>
                     <View style={Styles.btn}>
                         <Button
-                        onPress={this.addSensorAction}
+                        onPress={this.addLightAction}
                         title="Save"
                         color="#841584"
-                        accessibilityLabel="add new Sensor to database"
                         />
                     </View>
                     
                     <View style={Styles.btn}>
                         <Button
-                            onPress={()=>this.props.navigation.replace("AddMenu")}
+                            onPress={()=>this.props.navigation.navigate("AddObject",{id_user:this.props.route.params.id_user})}
                             title="Cancle"
                             color="#841584"
-                            accessibilityLabel="leave this screen without Save"
                         />
                     </View>
+                    
                 </View>
             </View> 
         </View>
@@ -102,7 +143,7 @@ const Styles = StyleSheet.create({
         justifyContent:"center"
     },
     header: {
-        flex: 3,
+        flex: 4,
         backgroundColor: "#1aaa1a",
         alignItems:"center",
         justifyContent:"center",
@@ -112,11 +153,24 @@ const Styles = StyleSheet.create({
         shadowOffset: {width:2, height:2},
         elevation: 6,
     },
-      body:{
-        flex:6,
+    roomItem:{
+        marginHorizontal: "10%",
+        marginVertical:"2%",
+        backgroundColor:"#000",
+        borderRadius:20,
+
+        justifyContent:"center",
+        alignItems:"center"
+    },
+    textRoom:{
+        fontSize:(height/100*30) /7,
+        color:'#fff'
+    },
+    body:{
+        flex:5,
         backgroundColor:"#9dc6a7",
-      },
-      Info:{
+    },
+    Info:{
           flex:7,
           marginHorizontal:"3%",
           marginTop:"3%",
@@ -126,35 +180,17 @@ const Styles = StyleSheet.create({
           shadowOffset: {width:2, height:2},
           elevation: 6,
           backgroundColor:"#fff" 
-      },
-      rowInfo:{
-          marginHorizontal:"3%",
-          borderBottomWidth:1,
-          borderBottomColor:"#d8c593",
-          marginVertical:"2%",
-          height:"25%"
-      },
-      row_1_Info:{
-        height:"50%",
-        fontSize:height / 40,
-        color:"#708160",
-        fontWeight:"100"
-      },
-      placeholder:{
-        height:"50%",
-        fontSize:height / 10,
-        color:"#000",
-      },
-      btnContainer:{
+    },
+    btnContainer:{
           flex:3,
           flexDirection:"row",
           justifyContent:"space-around",
           alignItems:"center"
-      },
-      btn:{
-        width:"30%",
-        height:"30%",
+    },
+    btn:{
+        width:"40%",
+        height:"35%",
         borderRadius:20,
-        
-      }
+        backgroundColor:"lightblue",
+    }
 })

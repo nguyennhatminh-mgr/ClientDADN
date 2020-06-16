@@ -3,14 +3,16 @@ import {View, Text ,TouchableOpacity,ScrollView, StyleSheet} from 'react-native'
 import { render } from 'react-dom';
 import * as ConstantURL from '../../constant/Constant';
 import Axios from 'axios';
+import Icons from 'react-native-vector-icons/FontAwesome';
 
 const Items = ({name,id,owner,onClick}) => {
     return (
             <TouchableOpacity style={Styles.blockItem} onPress={onClick}>
+                <Icons name="home" size={40} color="#1aaa1a" style={{marginRight: 12}}/>
                 <View style={Styles.item}>
-                    <Text> Room {name}</Text>
-                    <Text> ID: {id}</Text>
-                    <Text> User: {owner} </Text>
+                    <Text style={Styles.text}> Room: {name}</Text>
+                    <Text style={Styles.text}> ID: {id}</Text>
+                    <Text style={Styles.text}> User: {owner} </Text>
                 </View>
             </TouchableOpacity>
     );
@@ -80,6 +82,7 @@ const Styles = StyleSheet.create({
     
     blockItem:{
         flex: 1,
+        flexDirection:"row",
         margin: 8,
         backgroundColor: "#fff",
         shadowColor:'#000',
@@ -87,11 +90,15 @@ const Styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOffset: {width:2, height:2},
         borderRadius: 4,
-        justifyContent:'center',
+        //justifyContent:'center',
+        alignItems:"center"
     },
 
     container:{
         flex:1,
         flexDirection:'row',
+    },
+    text:{
+        fontSize:20
     }
 })

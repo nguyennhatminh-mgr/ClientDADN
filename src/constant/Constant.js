@@ -9,6 +9,7 @@ export const IP_URL = 'http://192.168.0.110:3000';
 
 //export const IP_URL = 'http://172.20.10.4:3000';
 
+
 export const LOGIN_URL = '/users/login';
 export const USERNAME_EXIST_URL = '/users/usernameexist';
 export const LIST_ROOM_NOT_OWNER = '/users/listroomnotowner';
@@ -31,6 +32,7 @@ export const ADD_DIVICE_URL = '/addDevice';
 export const VIEW_HISTORY_URL = '/viewHistory';
 export const VIEW_SENSOR_HISTORY_URL = '/viewSensorHistory';
 export const VIEW_LIGHT_HISTORY_URL = '/viewLightHistory';
+export const GET_DATA_HISTORY_URL = '/getDataHistory';
 
 // Control device
 export const GET_LIST_ROOM_CONTROL = '/listroomcontrol/';
