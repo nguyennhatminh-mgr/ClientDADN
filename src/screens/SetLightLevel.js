@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View,Text,StyleSheet,TouchableOpacity, Alert} from 'react-native';
+import {View,Text,StyleSheet,TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
 import {Slider} from 'react-native-elements';
 import {PieChart} from 'react-native-chart-kit';
 import { Dimensions } from 'react-native';
@@ -7,8 +7,8 @@ import axios from 'axios';
 
 import * as Constant from '../constant/Constant';
 
-const MAX_LIGHT_LEVEL = 400;
-const COMFORTABLE_LIGHT_LEVEL = 200;
+const MAX_LIGHT_LEVEL = 1023;
+const COMFORTABLE_LIGHT_LEVEL = 512;
 const DANGER_LIGHT_LEVEL = 300;
 const STEP_LIGHT_LEVEL = 1;
 const {width} = Dimensions.get("window");
@@ -29,7 +29,7 @@ export default class extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            light_level: COMFORTABLE_LIGHT_LEVEL,
+            light_level: null,
             data : [
                 {
                     name: "L",
@@ -97,16 +97,24 @@ export default class extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.wrap_chart}>
-                    <PieChart
-                    data={data}
-                    width={width}
-                    height={220}
-                    chartConfig={chartConfig}
-                    accessor="population"
-                    backgroundColor="transparent"
-                    paddingLeft="10"
-                    absolute
-                    />
+                    {
+                        true && this.state.light_level === null ? 
+                        (<View style={{flex: 1, justifyContent:"center", alignItems:"center"}}>
+                            <ActivityIndicator size="large" color="blue"/>
+                        </View>) :
+                        (
+                            <PieChart
+                            data={data}
+                            width={width}
+                            height={220}
+                            chartConfig={chartConfig}
+                            accessor="population"
+                            backgroundColor="transparent"
+                            paddingLeft="10"
+                            absolute
+                            />
+                        )
+                    }
                 </View>
                 <View style={styles.slider}>
                     <Slider step={STEP_LIGHT_LEVEL}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, View,StyleSheet,Image,TextInput,TouchableOpacity} from 'react-native';
+import {Text, View,StyleSheet,Image,TextInput,TouchableOpacity,ActivityIndicator} from 'react-native';
 import FontAweSome from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 
@@ -11,7 +11,7 @@ export default class Profile extends Component{
         super(props);
         this.state = {
             realname:'',
-            username: '',
+            username: null,
             typeofuser: ''
         }
     }
@@ -48,7 +48,11 @@ export default class Profile extends Component{
                         <View style={styles.profile_row_wrap_font}>
                             <FontAweSome name="user" size={30} color="#006600"/>
                         </View>
-                        <Text style={styles.profile_row_text}>{this.state.username}</Text>
+                        {
+                            true && ! this.state.username ? 
+                            (<ActivityIndicator style={styles.profile_row_text} size="large" color="blue"/>) :
+                            (<Text style={styles.profile_row_text}>{this.state.username}</Text>)
+                        }
                         <TouchableOpacity style={styles.profile_row_wrap_font} activeOpacity={0.5}
                         onPress={() => {
                             var dataEdit = {};
