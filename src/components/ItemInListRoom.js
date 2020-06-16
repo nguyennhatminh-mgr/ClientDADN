@@ -4,11 +4,11 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 
 class ItemInListRoom extends Component{
     render(){
-        const {room_name,navigation} = this.props;
+        const {room_id,room_name,navigation} = this.props;
         return (
             <TouchableOpacity activeOpacity={0.5} style={styles.container}
             onPress={() => {
-                navigation.push("ListDevice");
+                navigation.navigate("ListDevice",{room_id: room_id});
             }}>
                 <Icons name="home" size={40} color="#1aaa1a" style={{marginRight: 12}}/>
                 <Text>Room {room_name}</Text>

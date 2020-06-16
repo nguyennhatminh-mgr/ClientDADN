@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import {View,Text,StyleSheet,Switch} from 'react-native';
+import {View,Text,StyleSheet,Switch,TouchableOpacity} from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 
 class ItemInListDevice extends Component{
     constructor(props) {
         super(props);
 
         this.state = {
-            isSwitch: false
+            isSwitch: false,
+            lightLevel: 0
         }
     }
 
@@ -18,16 +20,19 @@ class ItemInListDevice extends Component{
     }
 
     showIcons = () => {
-        if(this.state.isSwitch){
-            return (
-                <Icons size={42} name="lightbulb-on" color="#DFD616"/>
-            );
-        }
-        else{
-            return (
-                <Icons size={42} name="lightbulb" color="#DFD616"/>
-            );
-        }
+        // if(this.state.isSwitch){
+        //     return (
+        //         <Icons size={42} name="lightbulb-on" color="#DFD616"/>
+        //     );
+        // }
+        // else{
+        //     return (
+        //         <Icons size={42} name="lightbulb" color="#DFD616"/>
+        //     );
+        // }
+        return (
+            <Icons size={42} name="lightbulb-on" color="#DFD616"/>
+        );
     }
 
     showText = () => {
@@ -39,22 +44,51 @@ class ItemInListDevice extends Component{
         }
     }
     
+    componentDidMount() {
+        const {value} = this.props;
+        if(value <= 0){
+            this.setState({
+                isSwitch: false
+            });
+        }
+        else{
+            this.setState({
+                isSwitch: true
+            });
+        }
+    }
+
+    isChangeLightLevel =(lightLevel) => {
+        this.setState({
+            lightLevel: lightLevel
+        });
+    }
+
     render(){
-        const {device_name} = this.props;
+        const {device_id,room_id} = this.props;
         return (
-            <View style={styles.container}>
-                {
-                    this.showIcons()
-                }
-                <Text>Light {device_name}: {this.showText()}</Text>
-                <Switch
-                    trackColor={{ false: "#767577", true: "#81b0ff" }}
-                    thumbColor={this.state.isEnabled ? "#f5dd4b" : "#f4f3f4"}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={this.toggleSwitch}
-                    value={this.state.isSwitch}
-                />
-            </View>
+            <TouchableOpacity style={styles.container}
+            onPress={() => {
+                this.props.navigation.navigate("ControlLight",{device_id: device_id, value: this.props.value,room_id: room_id})
+            }}>
+                <View style={styles.inner_container}>
+                    {
+                        this.showIcons()
+                    }
+                    <Text>Light: {device_id}</Text>
+                    {/* <Switch
+                        trackColor={{ false: "#767577", true: "#81b0ff" }}
+                        thumbColor={this.state.isEnabled ? "#f5dd4b" : "#f4f3f4"}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={this.toggleSwitch}
+                        value={this.state.isSwitch}
+                        disabled
+                    /> */}
+                    <FontAwesome name="baseball-ball" size={18} color="#1aaa1a"/>
+                </View>
+                {/* <Text>{new Date(this.props.received_time).toISOString()}</Text> */}
+                {/* <TextInput onChangeText={(lightLevel) => {this.isChangeLightLevel(lightLevel)}} placeholder="Light level"/> */}
+            </TouchableOpacity>
         );
     }
 }
@@ -71,7 +105,9 @@ const styles = StyleSheet.create({
         elevation: 6,
         borderRadius: 4,
         paddingHorizontal: 8,
-        paddingVertical: 12,
+        paddingVertical: 12        
+    },
+    inner_container: {
         flexDirection: "row",
         alignItems:"center",
         justifyContent: "space-between"
