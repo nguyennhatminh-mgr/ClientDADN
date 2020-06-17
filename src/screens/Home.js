@@ -24,10 +24,19 @@ export default function Home({navigation,route}){
                 <ItemInHome id_user={id_user} navigation={navigation} screen="AddObject" image={add_device} title="Add device"/>
                 <ItemInHome id_user={id_user} navigation={navigation} screen="AllRoom" image={room_info} title="View room"/>
             </View>
-            <View style={styles.rowinhome}>
-                <ItemInHome id_user={id_user} navigation={navigation} screen="SetLightLevel" image={setting_image} title="Set light level"/>
-                <ItemInHome id_user={id_user} navigation={navigation} screen="Profile" image={user_info} title="User Info"/>
-            </View>
+            {
+                true && id_user === Constant.ID_ADMIN ? (
+                    <View style={styles.rowinhome}>
+                        <ItemInHome id_user={id_user} navigation={navigation} screen="SetLightLevel" image={setting_image} title="Config level"/>
+                        <ItemInHome id_user={id_user} navigation={navigation} screen="Profile" image={user_info} title="User Info"/>
+                    </View>
+                ) : (
+                    <View style={styles.rowinhome}>
+                        <ItemInHome id_user={id_user} navigation={navigation} screen="Profile" image={user_info} title="User Info"/>
+                        <View style={{flex: 1, marginHorizontal: 8}}></View>
+                    </View>
+                )
+            }
         </ScrollView>
 
     );

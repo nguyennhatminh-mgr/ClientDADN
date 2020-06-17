@@ -40,39 +40,39 @@ export default function HomeNavigator(){
             options={{headerShown: false}}/>
             <Stack.Screen name="ChooseRoom"
             component={ChooseRoom}
-            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"Choose room to sign up"}}/>
             <Stack.Screen name="Home"
             component={Home}
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
             <Stack.Screen name="AllRoom"
             component={AllRoom}
-            options={{headerShown:false}}/>
+            options={{headerShown:false, title: "All rooms"}}/>
             
             <Stack.Screen name="Profile"
             component={Profile}
-            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"User information"}}/>
             <Stack.Screen name="EditProfile"
             component={EditProfile}
-            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"Edit name"}}/>
             <Stack.Screen name="ChangePassword"
             component={ChangePassword}
-            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff",title:"Change password"}}/>
             
             <Stack.Screen name="AddObject"
             component={AddObject}
-            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff",title:"Add new devices"}}/>
 
             <Stack.Screen name="AddSensor"
             component={AddSensor}
-            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff",title:"Add new sensor"}}/>
 
             <Stack.Screen name="AddLight"
             component={AddLight}
-            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"Add new light"}}/>
 
             <Stack.Screen name="AddRoom"
             component={AddRoom}
-            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"Add new room"}}/>
             
             <Stack.Screen name="History"
             component={History}
@@ -84,17 +84,17 @@ export default function HomeNavigator(){
 
             <Stack.Screen name="SetLightLevel"
             component={SetLightLevel}
-            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff",title:"SetLightLevel"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff",title:"Set sensor level"}}/>
         
             <Stack.Screen name="ListRoomControl" 
             component={ListRoom}
-            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"List of rooms"}}/>
             <Stack.Screen name="ListDevice" 
             component={ListDevice}
-            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"List of devices"}}/>
             <Stack.Screen name="ControlLight" 
             component={ControlLight}
-            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"Control light"}}/>
 
         </Stack.Navigator>
     );
