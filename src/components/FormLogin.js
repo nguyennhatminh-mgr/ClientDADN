@@ -5,8 +5,8 @@ export default class FormLogin extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
-            password: ""
+            username: this.props.username,
+            password: this.props.password
         }
     }
 
@@ -23,16 +23,16 @@ export default class FormLogin extends Component{
     }
     
     render(){
-        const {handleLogin} = this.props;
+        const {handleLogin,username,password} = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.wrap_input}>
                     <Image style={styles.icon_input} source={require('../assets/images/username.png')}/>
-                    <TextInput onChangeText={(username) => this.isChangeUsername(username)} name="username" style={styles.username_input} placeholder="Username"/>
+                    <TextInput defaultValue={username} onChangeText={(username) => this.isChangeUsername(username)} name="username" style={styles.username_input} placeholder="Username"/>
                 </View>
                 <View style={styles.wrap_input}>
                     <Image style={styles.icon_input} source={require('../assets/images/password.png')}/>
-                    <TextInput secureTextEntry={true} onChangeText={(password) => this.isChangePassword(password)} name="password" style={styles.username_input} placeholder="Password"/>
+                    <TextInput defaultValue={password} secureTextEntry={true} onChangeText={(password) => this.isChangePassword(password)} name="password" style={styles.username_input} placeholder="Password"/>
                 </View>
                 <View>
                     <TouchableOpacity style={styles.btn_submit}

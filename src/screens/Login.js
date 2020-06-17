@@ -23,6 +23,12 @@ export default class Login extends Component{
     }
     
     render(){
+        let username=null;
+        let password=null;
+        if(this.props.route.params){
+            username = this.props.route.params.username;
+            password = this.props.route.params.password;
+        }
         return (
             <View style={styles.container}>
                 <ImageBackground style={styles.bg_picture} source={require('../assets/images/backgroundlogin.png')}>
@@ -30,7 +36,7 @@ export default class Login extends Component{
                         <Image style={styles.logo} source={require('../assets/images/logo.png')}/>
                         <Text style={styles.title}>IOT LIGHT</Text>
                     </View>
-                    <FormLogin handleLogin={this.handleLogin} navigation={this.props.navigation}/>
+                    <FormLogin username={username} password={password} handleLogin={this.handleLogin} navigation={this.props.navigation}/>
                 </ImageBackground>
             </View>
         );

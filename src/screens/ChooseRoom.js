@@ -35,9 +35,11 @@ function ChooseRoom({route,navigation}) {
         }
         axios.post(`${Constant.IP_URL}${Constant.SIGNUP_URL}`,dataSignup)
         .then((response) => {
+            var data_signup = {...route.params.data_signup};
+
             if(response.data === SUCCESS){
                 navigation.popToTop();
-                navigation.replace("Login");
+                navigation.replace("Login",{username: data_signup.username, password: data_signup.password});
             }
         })
         .catch((error) => {
