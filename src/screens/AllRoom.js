@@ -8,7 +8,8 @@ export default class AllRoom extends React.Component{
         super(props);
         this.state={
             dataSource : [],
-            userID: this.props.route.params.id_user
+            userID: this.props.route.params.id_user,
+            
         }
     }
     componentDidMount(){
@@ -39,13 +40,17 @@ export default class AllRoom extends React.Component{
     componentWillUnmount(){
         this._isMounted = false;
     }
+    handleViewDetail = (navigation, userID)=>
+    {
+      navigation.navigate('Control', {screen: 'ListDevice', params: {userID: userID}});
+    }
     render(){
         return (   
             <ScrollView horizontal = {true} pagingEnabled ={true}>
                 {
                     this.state.dataSource.map(
-                        (item, index)=> (<RoomInfo key ={index} roomID = {item.name} owner ={item.realname} deviceID ={item.id}  brightness = {item.value} time ={this.convertDate(item.received_time)} />
-                    ))
+                        (item, index)=> (<RoomInfo key ={index} userID ={item.userID} roomID = {item.name} owner ={item.realname} deviceID ={item.id}  brightness = {item.value} time ={this.convertDate(item.received_time)} navigation = {this.props.navigation} handleVD = {this.handleViewDetail}/>
+                        ))
                 }                
             </ScrollView>
         );
