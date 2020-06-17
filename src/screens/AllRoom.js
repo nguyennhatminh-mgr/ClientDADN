@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView, RefreshControl} from 'react-native';
 import RoomInfo from '../components/RoomInfo';
 
 export default class AllRoom extends React.Component{
@@ -9,8 +9,20 @@ export default class AllRoom extends React.Component{
         this.state={
             dataSource : [],
             userID: this.props.route.params.id_user,
+            freshing : true
             
         }
+    }
+    getData(){
+        fetch(`http://192.168.1.102:3000/viewroom/${this.state.userID}`)
+        .then((response)=> response.json())
+        .then((responseJson)=>{
+                this.setState({
+                    dataSource : responseJson, 
+                    freshing :false
+                });
+        })
+        .catch((err)=>console.log(err))
     }
     componentDidMount(){
         this._isMounted = true;
@@ -19,7 +31,8 @@ export default class AllRoom extends React.Component{
         .then((responseJson)=>{
             if(this._isMounted){
                 this.setState({
-                    dataSource : responseJson
+                    dataSource : responseJson, 
+                    freshing :false
                 });
             }
         })
@@ -44,9 +57,29 @@ export default class AllRoom extends React.Component{
     {
       navigation.navigate('Control', {screen: 'ListDevice', params: {userID: userID}});
     }
+    onRefresh() {
+        //Clear old data of the list
+        this.setState({ dataSource: [] });
+        //Call the Service to get the latest data
+        this.getData();
+      }
     render(){
-        return (   
+        if(this.state.freshing){
+            return(
             <ScrollView horizontal = {true} pagingEnabled ={true}>
+                
+                {
+                    this.state.dataSource.map(
+                        (item, index)=> (<RoomInfo key ={index} userID ={item.userID} roomID = {item.name} owner ={item.realname} deviceID ={item.id}  brightness = {item.value} time ={this.convertDate(item.received_time)} navigation = {this.props.navigation} handleVD = {this.handleViewDetail}/>
+                        ))
+                }                
+            </ScrollView>);
+        }
+        else return (   
+            <ScrollView horizontal = {true} pagingEnabled ={true} refreshControl={
+                <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh.bind(this)} />
+            }>
+                
                 {
                     this.state.dataSource.map(
                         (item, index)=> (<RoomInfo key ={index} userID ={item.userID} roomID = {item.name} owner ={item.realname} deviceID ={item.id}  brightness = {item.value} time ={this.convertDate(item.received_time)} navigation = {this.props.navigation} handleVD = {this.handleViewDetail}/>
