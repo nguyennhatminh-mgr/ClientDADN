@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text ,TouchableOpacity,ScrollView, StyleSheet} from 'react-native';
+import {View, Text ,TouchableOpacity,ScrollView, StyleSheet, ActivityIndicator} from 'react-native';
 import { render } from 'react-dom';
 import * as ConstantURL from '../../constant/Constant';
 import Axios from 'axios';
@@ -22,7 +22,7 @@ export default class HistoryOp extends Component{
     constructor(props){
         super(props);
         this.state = {
-            listRoom : [],
+            listRoom : null,
         }
     }
 
@@ -50,17 +50,20 @@ export default class HistoryOp extends Component{
             <ScrollView style={Styles.listContainer}>
                 <Text style={Styles.title}>List Room</Text>
                 {
-                    
-                    this.state.listRoom.map(item =>(
-                        <View style={Styles.container} key={item.id}>
-                            <Items name={item.name} id={item.id} owner={item.owner} onClick={()=>{
-                                data.idRoom = item.id;
-                                data.name = item.name;
-                                data.owner = item.owner;
-                                navigation.navigate("Room",data);
-                            }}></Items>
-                        </View>
-                    ))
+                    (this.state.listRoom || false)?
+                    (
+                        this.state.listRoom.map(item =>(
+                            <View style={Styles.container} key={item.id}>
+                                <Items name={item.name} id={item.id} owner={item.owner} onClick={()=>{
+                                    data.idRoom = item.id;
+                                    data.name = item.name;
+                                    data.owner = item.owner;
+                                    navigation.navigate("Room",data);
+                                }}></Items>
+                            </View>
+                        ))
+                    )
+                    : (<ActivityIndicator size="large" color="#0000ff"/>)
                 }
             </ScrollView>
         );

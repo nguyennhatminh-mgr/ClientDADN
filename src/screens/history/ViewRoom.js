@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Alert ,View ,Text ,ScrollView,TouchableOpacity, StyleSheet} from 'react-native';
+import { Alert ,View ,Text ,ActivityIndicator,TouchableOpacity, StyleSheet} from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
 import Axios from 'axios';
@@ -30,8 +30,8 @@ export default class ViewRoom extends Component{
         this.state = {
             isVisible: false,
             chosenDate: '',
-            lamp : [],
-            sensor : [],
+            lamp :null ,
+            sensor : null,
             chartLabel:["10:10:10", "12:12:21", "13:14:15", "15:16:17:", "18:19:20", "19:20:20"],
             chartDataset:[
                 0,
@@ -127,31 +127,39 @@ export default class ViewRoom extends Component{
                 <View style={styles.container_content}>
                     <View style={styles.list}>
                         <Text style={styles.title}>Lamp</Text>
-                        <FlatList                          
-                            data={this.state.lamp}
-                            renderItem={({ item }) => (
-                                <Lamps
-                                id={item.id}
-                                getValue={this.getDataSet}
-                                />
-                            )}
-                            numColumns={1}
-                            keyExtractor={item => item.id}
-                        />
+                        {
+                            (this.state.lamp || false)?
+                            (<FlatList                          
+                                data={this.state.lamp}
+                                renderItem={({ item }) => (
+                                    <Lamps
+                                    id={item.id}
+                                    getValue={this.getDataSet}
+                                    />
+                                )}
+                                numColumns={1}
+                                keyExtractor={item => item.id}
+                            />)
+                            :(<ActivityIndicator size="large" color="#0000ff"/>)
+                        }
                     </View>
                     <View style={styles.list}>
                         <Text style={styles.title}>Sensor</Text>
-                        <FlatList                          
-                            data={this.state.sensor}
-                            renderItem={({ item }) => (
-                                <Lamps
-                                id={item.id}
-                                getValue={this.getDataSet}
-                                />
-                            )}
-                            numColumns={1}
-                            keyExtractor={item => item.id}
-                        />
+                        {
+                            (this.state.sensor || false)?
+                            (<FlatList                          
+                                data={this.state.sensor}
+                                renderItem={({ item }) => (
+                                    <Lamps
+                                    id={item.id}
+                                    getValue={this.getDataSet}
+                                    />
+                                )}
+                                numColumns={1}
+                                keyExtractor={item => item.id}
+                            />)
+                            :(<ActivityIndicator size="large" color="#0000ff"/>)
+                        }
                     </View>
                 </View>
                 <View style={styles.chartView}>
