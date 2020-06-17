@@ -34,26 +34,24 @@ export default class ViewRoom extends Component{
             sensor : [],
             chartLabel:["10:10:10", "12:12:21", "13:14:15", "15:16:17:", "18:19:20", "19:20:20"],
             chartDataset:[
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
               ],
         }
     }
 
-    componentDidMount(){
-        this.getLight();
-        this.getSensor();
+    async componentDidMount(){
+        await this.getLight();
+
+        await this.getSensor();
     }
 
     getLight = () => {
-        Axios.post(`${ConstantURL.IP_URL}${ConstantURL.VIEW_LIGHT_HISTORY_URL}`,{
-                id_room:`${this.props.route.params.idRoom}`,
-                time: `${this.state.chosenDate}`
-            }
+        Axios.get(`${ConstantURL.IP_URL}${ConstantURL.VIEW_LIGHT_HISTORY_URL}/${this.props.route.params.idRoom}`
         ).then((res) => {
             this.setState({
                 lamp: res.data,
@@ -65,10 +63,7 @@ export default class ViewRoom extends Component{
 
     getSensor = () => {
         // console.log(body);
-        Axios.post(`${ConstantURL.IP_URL}${ConstantURL.VIEW_SENSOR_HISTORY_URL}`,{
-                id_room:`${this.props.route.params.idRoom}`,
-                time: `${this.state.chosenDate}`
-            }
+        Axios.get(`${ConstantURL.IP_URL}${ConstantURL.VIEW_SENSOR_HISTORY_URL}/${this.props.route.params.idRoom}`
         ).then((res) => {
             this.setState({
                 sensor: res.data
@@ -124,7 +119,7 @@ export default class ViewRoom extends Component{
                         isVisible={this.state.isVisible}
                         onConfirm={this.handlePicker}
                         onCancel={this.hidePicker}
-                        mode={'datetime'}
+                        mode={'date'}
                         is24Hour={false}
                     />
                     <Text style={{color:'red', fontSize:20,}}>{this.state.chosenDate}</Text>

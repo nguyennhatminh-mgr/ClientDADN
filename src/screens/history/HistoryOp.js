@@ -27,10 +27,12 @@ export default class HistoryOp extends Component{
     }
 
     componentDidMount(){
-        Axios.get(`${ConstantURL.IP_URL}${ConstantURL.VIEW_HISTORY_URL}`).then((res) => {
+        console.log(this.props.route.params.id_user);
+        Axios.get(`${ConstantURL.IP_URL}${ConstantURL.VIEW_HISTORY_URL}/${this.props.route.params.id_user}`).then((res) => {
             this.setState({
                 listRoom: res.data
             });
+            // console.log(res.data)
         }).catch((error) =>{
             console.log(error);
         })

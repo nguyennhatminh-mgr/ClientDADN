@@ -5,6 +5,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import lightSensor from '../assets/images/lightSensor.png';
 import light from '../assets/images/light.png';
 import room from '../assets/images/room.png';
+import * as admin from '../constant/Constant';
+
+
 
 const Items = ({icon, type, onClick, imageSrc}) => {
     return (
@@ -39,10 +42,13 @@ export default class AddObjectScreen extends React.Component{
                     <Items icon="lightbulb-o" type="Light" 
                     onClick={()=>this.props.navigation.navigate('AddLight', {id_user:this.props.route.params.id_user})} 
                      imageSrc={light}/>
-
-                    <Items icon="home" type="Room"
-                    onClick={()=>this.props.navigation.navigate('AddRoom', {id_user:this.props.route.params.id_user})} 
-                    imageSrc={room}/>
+                    {
+                    this.props.route.params.id_user == admin.ID_ADMIN ?
+                        <Items icon="home" type="Room"
+                        onClick={()=>this.props.navigation.navigate('AddRoom', {id_user:this.props.route.params.id_user})} 
+                        imageSrc={room}/>
+                    : null
+                    }
                 </View> 
             </View>       
         );
