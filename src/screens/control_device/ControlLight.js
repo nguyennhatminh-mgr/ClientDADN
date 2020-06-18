@@ -72,7 +72,11 @@ const ControlLight = props => {
         axios.post(`${Constant.IP_URL}${Constant.CONTROL_LIGHT}`,data)
         .then((response) => {
             if(response.data === "SUCCESS"){
+                const {room_id,room_name} = props.route.params;
                 Alert.alert("Set light success");
+                props.navigation.goBack();
+                props.navigation.goBack();
+                props.navigation.navigate("ListDevice",{room_id: room_id,room_name:room_name});
             }
         })
         .catch((error) => {
@@ -116,9 +120,9 @@ const ControlLight = props => {
                 <TouchableOpacity style={styles.btn_set} activeOpacity={0.5}
                 onPress={() => {
                     handleSet();
-                    props.navigation.goBack();
-                    props.navigation.goBack();
-                    props.navigation.navigate("ListDevice",{room_id: props.route.params.room_id});
+                    // props.navigation.goBack();
+                    // props.navigation.goBack();
+                    // props.navigation.navigate("ListDevice",{room_id: props.route.params.room_id});
                 }}>
                     <Text style={styles.btn_set_text}>SET</Text>
                 </TouchableOpacity>
