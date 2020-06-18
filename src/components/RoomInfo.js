@@ -1,139 +1,75 @@
 import React from 'react';
-import {TouchableOpacity ,StyleSheet, Text, View, Image, ImageBackground, Dimensions } from 'react-native';
-import moment from 'moment';
-
+import { TouchableOpacity ,StyleSheet, Text, View,ScrollView, Image, ImageBackground, Dimensions, RefreshControl } from 'react-native';
+import ItemInRoomInfo from './ItemInRoomInfo';
 export default class RoomInfo extends React.Component{
+  _isMounted= false;
   constructor(props){
     super(props);
-    this.state = {
-      time: '',
-    };
+    this.state ={
+      data :[],
+      userID : this.props.userID, 
+    }
   }
-  componentDidMount(){
-    var that = this;  
-    var date = moment()
-      .utcOffset('+07:00')
-      .format(' hh:mm a');
-    that.setState({ time: date });
+  convertDate =(dateTime)=>
+     {
+        let time = new Date(dateTime);
+        let timeString = time.getDate() + "/"
+         + (time.getMonth()+1)  + "/" 
+         + time.getFullYear() + " , "  
+         + time.getHours() + ":"  
+         + time.getMinutes() + ":" 
+         + time.getSeconds();
+        return timeString;
+     }
+  handleViewDetail = (navigation, userID)=>
+  {
+    navigation.navigate('Control', {screen: 'ListDevice', params: {userID: userID}});
   }
+    
     render(){
       let time = new Date().getHours();
-      if(time>= 18){
+      console.log(this.props.data);
+      const {navigation, handleVD} = this.props;
+      let urlBackground  = (time>= 18)? require("../assets/images/nightbackground.jpg") : require("../assets/images/daybackground.jpg");
         return(
           <View style = {styles.container}>
-              <ImageBackground source = {require('../assets/images/nightbackground.jpg')}
+              <ImageBackground source = {urlBackground}
               style = {styles.background}>
-              <View style={{
-                          flex: 1,
+              <View style={{flex: 1,
                           justifyContent: 'center',
                           alignItems: 'center'}}>
-              <Text style={styles.header}>Last refreshed : {this.state.time}</Text>
+              <Text style={styles.header}>Last refreshed : {this.convertDate(new Date().getTime())}</Text>
             </View>
             <View style ={styles.user}>
-              <View style={{flex:2,}}>
-                <Image style= {styles.big_icon} source = {require('../assets/images/icon_house.png')}/>
-              </View>
-              <View style ={{flex: 5}}>
-                <Text style ={styles.text}>Room ID: {this.props.roomID}</Text>
-                <Text style ={styles.decription}>Owner: {this.props.owner}</Text>
-              </View>
-            </View>
+              <Text style ={{fontSize: 30*standarWidth/screenWidth,
+                      color: '#1aaa1a',
+                      fontWeight:'bold'}}>List Devices</Text>
 
-            <View style ={{flex:5, alignItems: 'center', justifyContent:'center'}}>
-              <View style={styles.specification}>
-                  <View style={{flex: 2}}>
-                    <Image style={styles.image}
-                    source ={require('../assets/images/icon_light.png')} ></Image>
-                  </View>
-                  <View style ={{flex: 5}}>
-                  <Text style ={styles.decription}>Lights On: {this.props.lightOn} / {this.props.numOfLight}</Text>
-                  </View>
-                </View>
-              <View style={styles.specification}>
-                <View style={{flex: 2}}>
-                  <Image style={styles.image} source ={require('../assets/images/icon_brightness.png')} />
-                </View>
-                <View style ={{flex: 5}}>
-                    <Text style ={styles.decription}>Brightness : {this.props.brightness}</Text>
-                </View>
-              </View>
             </View>
-
-            <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
-              <TouchableOpacity style = {styles.button}>
-                    <Text style ={styles.title_button}>Refresh</Text>
-              </TouchableOpacity>
-              
+            <View style={{alignItems:'center', flex: 5, padding: 10}}>
+            <ScrollView>
+              {
+                this.props.data.map((item, index)=> <ItemInRoomInfo key = {index} id= {item.deviceID} type ={item.type} value= {item.value} roomID ={item.roomName} time ={this.convertDate(item.time)}/>)
+              }
+            </ScrollView>
             </View>
+            <View style={{flex: 2}}>
             <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
-              <TouchableOpacity style = {styles.button}>
+              <TouchableOpacity style = {styles.button} onPress ={()=>this.handleViewDetail(navigation, this.props.userID)}>
                     <Text style ={styles.title_button}>View detail</Text>
               </TouchableOpacity>
+            </View>
+            <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
+              <TouchableOpacity style = {styles.button} onPress ={()=> navigation.goBack()}
+             >
+                    <Text style ={styles.title_button}>Back</Text>
+              </TouchableOpacity>
+            </View>
             </View>
             <Text style={styles.footer}>Phần mềm quản lý hệ thống chiếu sáng</Text>
             </ImageBackground>
           </View>
       );
-      }
-      else{
-        return(
-          <View style = {styles.container}>
-              <ImageBackground source = {require('../assets/images/daybackground.jpg')}
-              style = {styles.background}>
-              <View style={{
-                          flex: 1,
-                          justifyContent: 'center',
-                          alignItems: 'center'}}>
-              <Text style={styles.header}>Last refreshed: {this.state.time}</Text>
-            </View>
-            <View style ={styles.user}>
-              <View style={{flex:2,}}>
-                <Image style= {styles.big_icon} source = {require('../assets/images/icon_house.png')}/>
-              </View>
-              <View style ={{flex: 5}}>
-                <Text style ={styles.text}>Room ID: {this.props.roomID}</Text>
-                <Text style ={styles.text1}>Owner: {this.props.owner}</Text>
-              </View>
-            </View>
-
-            <View style ={{flex:5, alignItems: 'center', justifyContent:'center'}}>
-              <View style={styles.specification}>
-                  <View style={{flex: 2}}>
-                    <Image style={styles.image}
-                    source ={require('../assets/images/icon_light.png')} ></Image>
-                  </View>
-                  <View style ={{flex: 5}}>
-                  <Text style ={styles.decription}>Lights On: {this.props.lightOn} / {this.props.numOfLight}</Text>
-                  </View>
-                </View>
-              <View style={styles.specification}>
-                <View style={{flex: 2}}>
-                  <Image style={styles.image}
-                  source ={require('../assets/images/icon_brightness.png')} ></Image>
-                </View>
-                <View style ={{flex: 5}}>
-                    <Text style ={styles.decription}>Brightness: {this.props.brightness}</Text>
-                </View>
-              </View>
-            </View>
-
-            <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
-              <TouchableOpacity style = {styles.button}>
-                    <Text style ={styles.title_button}>Refresh</Text>
-              </TouchableOpacity>
-              
-            </View>
-            <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
-              <TouchableOpacity style = {styles.button}>
-                    <Text style ={styles.title_button}>View detail</Text>
-              </TouchableOpacity>
-            </View>
-            <Text style={styles.footer}>Phần mềm quản lý hệ thống chiếu sáng</Text>
-            </ImageBackground>
-          </View>
-      );
-      }
-      
     }
   }
   const screenWidth =  Dimensions.get("window").width;
@@ -207,7 +143,7 @@ export default class RoomInfo extends React.Component{
     footer:{
       color: 'gray', 
       textAlign:'center', 
-      margin:10*standarWidth/screenWidth
+      marginBottom:10*standarWidth/screenWidth
     },
     title_button:{
       color: 'white', 
@@ -219,3 +155,4 @@ export default class RoomInfo extends React.Component{
       color: 'white'
     }
   });
+
