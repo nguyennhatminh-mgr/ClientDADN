@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Alert,TextInput,TouchableOpacity, StyleSheet, Button, Dimensions} from 'react-native';
+import {View, Text, Alert,ActivityIndicator,TouchableOpacity, StyleSheet, Button, Dimensions} from 'react-native';
 const { width, height } = Dimensions.get('window');
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Items from '../components/AddItems';
@@ -11,7 +11,7 @@ const RoomItems = ({obj, setRoom})=>{
     return (
         <TouchableOpacity 
         onPress={()=>{
-            console.log(obj)
+            //console.log(obj)
             setRoom(obj.id_room);
         }}
         >
@@ -29,7 +29,7 @@ export default class AddSensorScreen extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            listRoom:[{id_room:""}],
+            listRoom:null,
             type:'light',
             Id:'',
             Room:'',
@@ -97,20 +97,26 @@ export default class AddSensorScreen extends React.Component{
                 
             <View style={Styles.header}>
                 <Text style={{fontSize:(height/100*30) /7 , fontWeight:"bold",marginVertical:"7%"}}>Select Room</Text>
-                <FlatList
-                style={{marginBottom:"4%",borderWidth:2 ,borderBottomColor:"#000"}}
-                data={this.state.listRoom}
-                renderItem={({ item }) => (
-                <RoomItems
-                    obj = {item}
-                    setRoom={this.setRoom}
-                />
-                )}
-                
-                numColumns={2}
-                keyExtractor={item => item.id_room}
-                />
-               
+                {
+                (this.state.listRoom || false) ?
+                    (
+                        <FlatList
+                        style={{marginBottom:"4%",borderWidth:2 ,borderBottomColor:"#000"}}
+                        data={this.state.listRoom}
+                        renderItem={({ item }) => (
+                        <RoomItems
+                            obj = {item}
+                            setRoom={this.setRoom}
+                        />
+                        )}
+                        
+                        numColumns={2}
+                        keyExtractor={item => item.id_room}
+                        />
+                    )
+                :
+                (<ActivityIndicator size="large" color="#0000ff"/>)
+                }
             </View>
     
             <View style={Styles.body}>  

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Alert,Text ,TextInput,TouchableOpacity, StyleSheet, Button, Dimensions} from 'react-native';
+import {View, Alert,Text ,ActivityIndicator,TouchableOpacity, StyleSheet, Button, Dimensions} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const { width, height } = Dimensions.get('window');
 import Items from '../components/AddItems';
@@ -27,7 +27,7 @@ export default class AddSensorScreen extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            listRoom:[{id_room:""}],
+            listRoom:null,
             type:'sensor',
             Id:'',
             Room:'',
@@ -47,7 +47,7 @@ export default class AddSensorScreen extends React.Component{
 
     setText = (textParam, type)=>{
         switch(type){
-            case "Id":
+            case "ID":
                 this.setState({
                     Id: textParam
                 });
@@ -88,7 +88,9 @@ export default class AddSensorScreen extends React.Component{
                 
             <View style={Styles.header}>
                 <Text style={{fontSize:(height/100*30) /7 , fontWeight:"bold",marginVertical:"7%"}}>Select Room</Text>
-                <FlatList
+                {
+                (this.state.listRoom || false) ?
+                (<FlatList
                 style={{marginBottom:"4%",borderWidth:2 ,borderBottomColor:"#000"}}
                 data={this.state.listRoom}
                 renderItem={({ item }) => (
@@ -100,8 +102,9 @@ export default class AddSensorScreen extends React.Component{
                 
                 numColumns={2}
                 keyExtractor={item => item.id_room}
-                />
-               
+                />)
+                :(<ActivityIndicator size="large" color="#0000ff"/>)
+               }
             </View>
     
             <View style={Styles.body}>  
@@ -113,7 +116,7 @@ export default class AddSensorScreen extends React.Component{
                 <View style={Styles.btnContainer}>
                     <View style={Styles.btn}>
                         <Button
-                        onPress={this.addLightAction}
+                        onPress={this.addSensorAction}
                         title="Save"
                         color="#841584"
                         />
