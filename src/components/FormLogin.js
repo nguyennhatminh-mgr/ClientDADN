@@ -2,21 +2,46 @@ import React, { Component } from 'react';
 import {Image, View, TextInput,StyleSheet, TouchableOpacity,Text} from 'react-native';
 
 export default class FormLogin extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: this.props.username,
+            password: this.props.password
+        }
+    }
+
+    isChangeUsername = (username) => {
+        this.setState({
+            username: username
+        });
+    }
+
+    isChangePassword = (password) => {
+        this.setState({
+            password: password
+        });
+    }
+    
     render(){
+        const {handleLogin,username,password} = this.props;
         return (
             <View style={styles.container}>
                 <View style={styles.wrap_input}>
                     <Image style={styles.icon_input} source={require('../assets/images/username.png')}/>
-                    <TextInput style={styles.email_input} placeholder="Email"/>
+                    <TextInput defaultValue={username} onChangeText={(username) => this.isChangeUsername(username)} name="username" style={styles.username_input} placeholder="Username"/>
                 </View>
                 <View style={styles.wrap_input}>
                     <Image style={styles.icon_input} source={require('../assets/images/password.png')}/>
-                    <TextInput secureTextEntry={true} style={styles.email_input} placeholder="Password"/>
+                    <TextInput defaultValue={password} secureTextEntry={true} onChangeText={(password) => this.isChangePassword(password)} name="password" style={styles.username_input} placeholder="Password"/>
                 </View>
                 <View>
                     <TouchableOpacity style={styles.btn_submit}
                     onPress={() => {
-                        this.props.navigation.replace("Home");
+                        var data_login = {};
+                        data_login.username = this.state.username;
+                        data_login.password = this.state.password;
+                        handleLogin(data_login,this.props.navigation);
+                        // this.props.navigation.replace("Home");
                     }}>
                         <Text style={styles.text_btn_submit}>LOGIN</Text>
                     </TouchableOpacity>
@@ -47,7 +72,7 @@ const styles = StyleSheet.create({
         top: 9,
         left: 16
     },
-    email_input: {
+    username_input: {
         backgroundColor: "rgba(255, 255, 255, 0.4)",
         padding: 10,
         paddingLeft: 45,

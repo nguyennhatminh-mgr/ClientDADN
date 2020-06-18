@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Alert,Text ,ActivityIndicator,TouchableOpacity, StyleSheet, Button, Dimensions} from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {View, Text, Alert,ActivityIndicator,TouchableOpacity, StyleSheet, Button, Dimensions} from 'react-native';
 const { width, height } = Dimensions.get('window');
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Items from '../components/AddItems';
 import axios from 'axios';
 import * as ConstantURL from '../constant/Constant';
@@ -11,7 +11,8 @@ const RoomItems = ({obj, setRoom})=>{
     return (
         <TouchableOpacity 
         onPress={()=>{
-            setRoom(obj.id_room,"Room");
+            //console.log(obj)
+            setRoom(obj.id_room);
         }}
         >
             <View style={Styles.roomItem}>
@@ -23,12 +24,13 @@ const RoomItems = ({obj, setRoom})=>{
     );
 }
 
+
 export default class AddSensorScreen extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             listRoom:null,
-            type:'sensor',
+            type:'light',
             Id:'',
             Room:'',
         }
@@ -45,6 +47,12 @@ export default class AddSensorScreen extends React.Component{
         })
     }
 
+    setRoom = (room_id)=>{
+        this.setState({
+            Room: room_id
+        });
+    }
+
     setText = (textParam, type)=>{
         switch(type){
             case "ID":
@@ -57,9 +65,10 @@ export default class AddSensorScreen extends React.Component{
                     Room: textParam
                 });
         }
+        //console.log(this.state)
     }
-    
-    addSensorAction =()=>{
+
+    addLightAction =()=>{
         var body = {id:'', type:'', id_room:''};
         if(this.state.type=='' || this.state.Id == '' || this.state.Room == '' ){
             Alert.alert('warning','fill in form!');
@@ -72,7 +81,7 @@ export default class AddSensorScreen extends React.Component{
         //console.log(body);
         axios.post(`${ConstantURL.IP_URL}${ConstantURL.ADD_DIVICE_URL}`,body).then((response) => {
             if(response.data === "ok"){
-                Alert.alert('congratulations!','add sensor successfully!');
+                Alert.alert('congratulations','add light successfully!');
             }
             else{
                 Alert.alert('fail','ID already exist!');;
@@ -81,7 +90,7 @@ export default class AddSensorScreen extends React.Component{
             console.log(error);
         });
     }
-
+    
     render(){
         return (
             <View style={Styles.listContainer}>
@@ -90,33 +99,36 @@ export default class AddSensorScreen extends React.Component{
                 <Text style={{fontSize:(height/100*30) /7 , fontWeight:"bold",marginVertical:"7%"}}>Select Room</Text>
                 {
                 (this.state.listRoom || false) ?
-                (<FlatList
-                style={{marginBottom:"4%",borderWidth:2 ,borderBottomColor:"#000"}}
-                data={this.state.listRoom}
-                renderItem={({ item }) => (
-                <RoomItems
-                    obj = {item}
-                    setRoom={this.setText}
-                />
-                )}
-                
-                numColumns={2}
-                keyExtractor={item => item.id_room}
-                />)
-                :(<ActivityIndicator size="large" color="#0000ff"/>)
-               }
+                    (
+                        <FlatList
+                        style={{marginBottom:"4%",borderWidth:2 ,borderBottomColor:"#000"}}
+                        data={this.state.listRoom}
+                        renderItem={({ item }) => (
+                        <RoomItems
+                            obj = {item}
+                            setRoom={this.setRoom}
+                        />
+                        )}
+                        
+                        numColumns={2}
+                        keyExtractor={item => item.id_room}
+                        />
+                    )
+                :
+                (<ActivityIndicator size="large" color="#0000ff"/>)
+                }
             </View>
     
             <View style={Styles.body}>  
                 <View style={Styles.Info}>
                     <Items type={"Room ID"} placeholder={"201h1"} setText={this.setText} room_id={this.state.Room}/>
-                    <Items type={"ID"} placeholder={"S1"} setText={this.setText}/>
+                    <Items type={"ID"} placeholder={"L01"} setText={this.setText}/>
                 </View>
     
                 <View style={Styles.btnContainer}>
                     <View style={Styles.btn}>
                         <Button
-                        onPress={this.addSensorAction}
+                        onPress={this.addLightAction}
                         title="Save"
                         color="#841584"
                         />

@@ -41,10 +41,10 @@ export default class RoomInfo extends React.Component{
               <Text style={styles.header}>Last refreshed : {this.convertDate(new Date().getTime())}</Text>
             </View>
             <View style ={styles.user}>
-
               <Text style ={{fontSize: 30*standarWidth/screenWidth,
                       color: '#1aaa1a',
                       fontWeight:'bold'}}>List Devices</Text>
+
             </View>
             <View style={{alignItems:'center', flex: 5, padding: 10}}>
             <ScrollView>
