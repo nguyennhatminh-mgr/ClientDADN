@@ -1,43 +1,28 @@
 import React from 'react';
 import {ScrollView, RefreshControl} from 'react-native';
 import RoomInfo from '../components/RoomInfo';
-
+import * as Constant from '../constant/Constant';
 export default class AllRoom extends React.Component{
     _isMounted = false;
+    dataSource = [];
     constructor(props){
         super(props);
         this.state={
             dataSource : [],
             userID: this.props.route.params.id_user,
-            freshing : true
             
         }
+        this.getData();
     }
-    getData(){
-        fetch(`http://192.168.1.102:3000/viewroom/${this.state.userID}`)
-        .then((response)=> response.json())
-        .then((responseJson)=>{
-                this.setState({
-                    dataSource : responseJson, 
-                    freshing :false
-                });
-        })
-        .catch((err)=>console.log(err))
-    }
-    componentDidMount(){
-        this._isMounted = true;
-        fetch(`http://192.168.1.102:3000/viewroom/${this.state.userID}`)
-        .then((response)=> response.json())
-        .then((responseJson)=>{
-            if(this._isMounted){
-                this.setState({
-                    dataSource : responseJson, 
-                    freshing :false
-                });
-            }
-        })
-        .catch((err)=>console.log(err))
-        
+    async getData(){
+       await fetch(`http://192.168.1.102:3000/viewroom/${this.state.userID}`)
+       .then((response)=> response.json())
+       .then((responseJson)=>{
+           this.setState({
+               dataSource: responseJson
+           });
+       })
+       .catch(err=>console.log(err))
     }
     convertDate =(dateTime)=>
      {
@@ -50,42 +35,14 @@ export default class AllRoom extends React.Component{
          + time.getSeconds();
         return timeString;
      }   
-    componentWillUnmount(){
-        this._isMounted = false;
-    }
     handleViewDetail = (navigation, userID)=>
     {
       navigation.navigate('Control', {screen: 'ListDevice', params: {userID: userID}});
     }
-    onRefresh() {
-        //Clear old data of the list
-        this.setState({ dataSource: [] });
-        //Call the Service to get the latest data
-        this.getData();
-      }
     render(){
-        if(this.state.freshing){
+            const {navigation} = this.props;
             return(
-            <ScrollView horizontal = {true} pagingEnabled ={true}>
-                
-                {
-                    this.state.dataSource.map(
-                        (item, index)=> (<RoomInfo key ={index} userID ={item.userID} roomID = {item.name} owner ={item.realname} deviceID ={item.id}  brightness = {item.value} time ={this.convertDate(item.received_time)} navigation = {this.props.navigation} handleVD = {this.handleViewDetail}/>
-                        ))
-                }                
-            </ScrollView>);
+                <RoomInfo data = {this.state.dataSource} navigation = {navigation} userID = {this.state.userID}/>
+            )
         }
-        else return (   
-            <ScrollView horizontal = {true} pagingEnabled ={true} refreshControl={
-                <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh.bind(this)} />
-            }>
-                
-                {
-                    this.state.dataSource.map(
-                        (item, index)=> (<RoomInfo key ={index} userID ={item.userID} roomID = {item.name} owner ={item.realname} deviceID ={item.id}  brightness = {item.value} time ={this.convertDate(item.received_time)} navigation = {this.props.navigation} handleVD = {this.handleViewDetail}/>
-                        ))
-                }                
-            </ScrollView>
-        );
     }
-}
