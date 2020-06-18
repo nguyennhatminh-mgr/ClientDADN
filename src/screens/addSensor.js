@@ -47,7 +47,7 @@ export default class AddSensorScreen extends React.Component{
 
     setText = (textParam, type)=>{
         switch(type){
-            case "Id":
+            case "ID":
                 this.setState({
                     Id: textParam
                 });
@@ -116,7 +116,7 @@ export default class AddSensorScreen extends React.Component{
                 <View style={Styles.btnContainer}>
                     <View style={Styles.btn}>
                         <Button
-                        onPress={this.addLightAction}
+                        onPress={this.addSensorAction}
                         title="Save"
                         color="#841584"
                         />
