@@ -1,14 +1,31 @@
 import React from 'react';
 import { TouchableOpacity ,StyleSheet, Text, View,ScrollView, Image, ImageBackground, Dimensions, RefreshControl } from 'react-native';
 import ItemInRoomInfo from './ItemInRoomInfo';
+import * as Constant from '../constant/Constant';
 export default class RoomInfo extends React.Component{
   _isMounted= false;
   constructor(props){
     super(props);
     this.state ={
-      data :[],
-      userID : this.props.userID, 
+      dataSource :[],
+      userID : this.props.route.params.userID,
+      owner:  this.props.route.params.owner,
+      roomID: this.props.route.params.roomID
     }
+  }
+
+  componentDidMount(){
+    this.getData();
+  }
+  async getData(){
+    await fetch(`http://192.168.1.102:3000/viewroom/${this.state.userID}`)
+    .then((response)=> response.json())
+    .then((responseJson)=>{
+        this.setState({
+            dataSource: responseJson
+        });
+    })
+    .catch(err=>console.log(err))
   }
   convertDate =(dateTime)=>
      {
@@ -21,15 +38,14 @@ export default class RoomInfo extends React.Component{
          + time.getSeconds();
         return timeString;
      }
-  handleViewDetail = (navigation, userID)=>
-  {
-    navigation.navigate('Control', {screen: 'ListDevice', params: {userID: userID}});
-  }
+  // handleViewDetail = (navigation, userID)=>
+  // {
+  //   navigation.navigate('Control', {screen: 'ListDevice', params: {userID: userID}});
+  // }
     
     render(){
       let time = new Date().getHours();
-      console.log(this.props.data);
-      const {navigation, handleVD} = this.props;
+      const {navigation} = this.props;
       let urlBackground  = (time>= 18)? require("../assets/images/nightbackground.jpg") : require("../assets/images/daybackground.jpg");
         return(
           <View style = {styles.container}>
@@ -43,25 +59,22 @@ export default class RoomInfo extends React.Component{
             <View style ={styles.user}>
               <Text style ={{fontSize: 30*standarWidth/screenWidth,
                       color: '#1aaa1a',
-                      fontWeight:'bold'}}>List Devices</Text>
-
+              fontWeight:'bold'}}>Devices Status</Text>
+              <Text style ={{fontSize: 15,color: '#1aaa1a'}}>Owner: {this.state.owner}</Text>
+              <Text style ={{fontSize: 15,color: '#1aaa1a'}}>Room ID: {this.state.roomID}</Text>
             </View>
-            <View style={{alignItems:'center', flex: 5, padding: 10}}>
+            <View style= {{flex: 1}}></View>
+            <View style={{alignItems:'center',justifyContent:'space-between', flex: 4, padding: 10}}>
             <ScrollView>
               {
-                this.props.data.map((item, index)=> <ItemInRoomInfo key = {index} id= {item.deviceID} type ={item.type} value= {item.value} roomID ={item.roomName} time ={this.convertDate(item.time)}/>)
+                this.state.dataSource.map((item, index)=> <ItemInRoomInfo key = {index} id= {item.deviceID} type ={item.type} value= {item.value} time ={this.convertDate(item.time)}/>)
               }
             </ScrollView>
             </View>
             <View style={{flex: 2}}>
+
             <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
-              <TouchableOpacity style = {styles.button} onPress ={()=>this.handleViewDetail(navigation, this.props.userID)}>
-                    <Text style ={styles.title_button}>View detail</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
-              <TouchableOpacity style = {styles.button} onPress ={()=> navigation.goBack()}
-             >
+              <TouchableOpacity style = {styles.button} onPress ={()=> navigation.goBack()}>
                     <Text style ={styles.title_button}>Back</Text>
               </TouchableOpacity>
             </View>
@@ -118,7 +131,7 @@ export default class RoomInfo extends React.Component{
       width: 250*standarWidth/screenWidth},
     user:{
       flex: 2,
-      flexDirection: 'row',
+      flexDirection: 'column',
       margin: 10*standarWidth/screenWidth,
       justifyContent:'center',
       alignItems:'center', 
