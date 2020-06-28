@@ -18,7 +18,7 @@ export default class AllRoom extends React.Component{
         this.getData();
     }
     async getData(){
-       await fetch(`http://192.168.1.102:3000/listroominfo/${this.state.userID}`)
+       await fetch(`${Constant.IP_URL}${Constant.LIST_ROOM_INFO}/${this.state.userID}`)
        .then((response)=> response.json())
        .then((responseJson)=>{
            this.setState({
