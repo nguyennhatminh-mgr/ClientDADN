@@ -1,10 +1,8 @@
 import React from 'react';
 import {ScrollView, View, StyleSheet, Text} from 'react-native';
-import RoomInfo from '../components/RoomInfo';
 import * as Constant from '../constant/Constant';
 import ItemInListRoomInfo from '../components/ItemInListRoomInfo';
 export default class AllRoom extends React.Component{
-    _isMounted = false;
     dataSource = [];
     constructor(props){
         super(props);
@@ -27,25 +25,10 @@ export default class AllRoom extends React.Component{
        })
        .catch(err=>console.log(err))
     }
-    convertDate =(dateTime)=>
-     {
-        let time = new Date(dateTime);
-        let timeString = time.getDate() + "/"
-         + (time.getMonth()+1)  + "/" 
-         + time.getFullYear() + " , "  
-         + time.getHours() + ":"  
-         + time.getMinutes() + ":" 
-         + time.getSeconds();
-        return timeString;
-     }   
-    handleViewDetail = (navigation, userID)=>
-    {
-      navigation.navigate('Control', {screen: 'ListDevice', params: {userID: userID}});
-    }
     render(){
             const {navigation} = this.props;
             return(
-                <View style={{marginTop: 30}}>
+                <View >
                 {
                     true && !this.state.dataSource ?
                     (<View style={styles.container}>
@@ -56,7 +39,7 @@ export default class AllRoom extends React.Component{
                                 {
                                     this.state.dataSource.map((value,index) => {
                                         return (
-                                            <ItemInListRoomInfo userID = {value.userID} roomName ={value.id_room} key ={index} userName = {value.realname} navigation ={navigation}/>
+                                            <ItemInListRoomInfo userID = {value.id} roomName ={value.name} key ={index} userName = {value.realname} navigation ={navigation}/>
 
                                         );
                                     })
