@@ -28,6 +28,9 @@ import ControlLight from '../screens/control_device/ControlLight';
 import Notification from '../screens/notify/Notification';
 
 
+import RoomInfo from'../components/RoomInfo';
+
+
 const Stack = createStackNavigator();
 
 export default function HomeNavigator(){
@@ -47,7 +50,7 @@ export default function HomeNavigator(){
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff"}}/>
             <Stack.Screen name="AllRoom"
             component={AllRoom}
-            options={{headerShown:false, title: "All rooms"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title :"List Rooms"}}/>
             
             <Stack.Screen name="Profile"
             component={Profile}
@@ -97,9 +100,15 @@ export default function HomeNavigator(){
             component={ControlLight}
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"Control light"}}/>
 
+
             <Stack.Screen name="Notification" 
             component={Notification}
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"Notifications"}}/>
+
+
+            <Stack.Screen name="RoomInfo"
+            component={RoomInfo}
+            options={{headerShown: false}}/>
 
         </Stack.Navigator>
     );
