@@ -7,6 +7,7 @@ import add_device from '../assets/images/add_device.png';
 import room_info from '../assets/images/room_info.jpg';
 import control_device from '../assets/images/control_device.jpg';
 import history from '../assets/images/history.jpg';
+import notification from '../assets/images/notification.png';
 import * as Constant from '../constant/Constant';
 
 export default function Home({navigation,route}){
@@ -32,10 +33,18 @@ export default function Home({navigation,route}){
                     </View>
                 ) : (
                     <View style={styles.rowinhome}>
+                        <ItemInHome id_user={id_user} navigation={navigation} screen="Notification" image={notification} title="Notifications"/>
                         <ItemInHome id_user={id_user} navigation={navigation} screen="Profile" image={user_info} title="User Info"/>
-                        <View style={{flex: 1, marginHorizontal: 8}}></View>
                     </View>
                 )
+            }
+            {
+                 true && id_user === Constant.ID_ADMIN ? (
+                    <View style={styles.rowinhome}>
+                        <ItemInHome id_user={id_user} navigation={navigation} screen="Notification" image={notification} title="Notifications"/>
+                        <View style={{flex: 1, marginHorizontal: 8}}></View>
+                    </View>
+                ) : null
             }
         </ScrollView>
 

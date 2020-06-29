@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet,Text,TouchableOpacity, Alert,ActivityIndicator } from 'react-native';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Slider} from 'react-native-elements';
+
 import axios from 'axios';
 
 import * as Constant from '../../constant/Constant';
@@ -86,6 +88,28 @@ const ControlLight = props => {
 
     return (
         <View style={styles.container}>
+            <View style={styles.wrap_room_name}>
+                <View style={styles.inner_room_name}>
+                    <View style={{flex: 1}}>
+                        <FontAwesome name="home" size={40} color="#fff" style={{marginLeft: 4}}/>
+                    </View>
+                    <View style={{flex: 6}}>
+                        <Text style={styles.room_name}>{props.route.params.room_name}</Text>
+                    </View> 
+                    <View style={{flex: 1}}></View>
+                </View>
+            </View>
+            <View style={styles.wrap_room_name}>
+                <View style={styles.inner_room_name}>
+                    <View style={{flex: 1}}>
+                        <Icons size={40} name="lightbulb-on" color={color} style={{marginLeft: 4}}/>
+                    </View>
+                    <View style={{flex: 6}}>
+                        <Text style={styles.room_name}>{props.route.params.device_id}</Text>
+                    </View> 
+                    <View style={{flex: 1}}></View>
+                </View>
+            </View>
             <View style={styles.icon}>
                 {
                     true && light_level>0 ?
@@ -186,6 +210,23 @@ const styles = StyleSheet.create({
     },
     btn_set_text: {
         color: "#fff"
+    },
+    wrap_room_name: {
+        backgroundColor:"#2A651B",
+        paddingVertical: 4,
+        borderBottomColor: "#fff",
+        borderBottomWidth: 1
+    },
+    inner_room_name : {
+        flexDirection:"row",
+        justifyContent:"center",
+        alignItems:"center"
+    },
+    room_name: {
+        color: "#fff",
+        textAlign:"center",
+        paddingVertical: 10,
+        fontSize: 16
     }
 });
 
