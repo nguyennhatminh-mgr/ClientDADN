@@ -47,3 +47,6 @@ export const CONTROL_LIGHT = '/controllight';
 export const GET_LIGHT = '/getlight/';
 export const screenWidth =  Dimensions.get("window").width;
 export const screenHeight =  Dimensions.get("window").height;
+
+// Notification
+export const GET_LIST_NOTIFICATION = '/notification/';
