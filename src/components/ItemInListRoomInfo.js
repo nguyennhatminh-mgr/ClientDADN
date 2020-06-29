@@ -19,7 +19,7 @@ export default class ItemInListRoomInfo extends Component{
                         <Icons name="home" size={40} color="#1aaa1a" style={{marginRight: 12}}/>
                     </View>
                     <View style ={{flex: 5}}>
-                        <Text>Room ID: {this.props.roomName}</Text>
+                <Text>Room ID: {this.props.roomName}</Text>
                         <Text>Owner: {this.props.userName}</Text>
                     </View>
                 </View>
