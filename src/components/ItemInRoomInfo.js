@@ -5,7 +5,7 @@ import {Text, View, StyleSheet, Image, Dimensions} from 'react-native';
 
 export default class ItemInRoomInfo extends Component{  
     render(){
-        let urlIcon = (this.props.type == "Sensor" ||this.props.type == "sensor"||this.props.type == "SENSOR")? require('../assets/images/iconSensor.png') : require('../assets/images/icon_light.png');
+        let urlIcon = (this.props.type == "Sensor" ||this.props.type == "sensor"||this.props.type == "SENSOR")? require('../assets/images/iconSensor_1.png') : require('../assets/images/icon_light.png');
         return(
             <View style ={styles.container}>
                 <View style={styles.container1}>
