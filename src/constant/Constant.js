@@ -1,9 +1,10 @@
+import {Dimensions} from 'react-native';
 export const ID_ADMIN = '123AFFK89HM2';
 
 // export const IP_URL = 'http://10.0.134.191:3000';
 
 
-export const IP_URL = 'http://192.168.0.110:3000';
+export const IP_URL = 'http://192.168.1.102:3000';
 
 // export const IP_URL = 'http://192.168.43.125:3000';
 
@@ -19,7 +20,8 @@ export const USERNAME_EXIST_URL = '/users/usernameexist';
 export const LIST_ROOM_NOT_OWNER = '/users/listroomnotowner';
 export const SIGNUP_URL = '/users/signup';
 export const USER_INFO_URL = '/users/info';
-
+export const VIEW_ROOM_URL = '/viewroom';
+export const LIST_ROOM_INFO = '/listroominfo';
 
 export const SET_LIGHT_LEVEL = '/setlightlevel/';
 export const GET_CURRENT_LIGHT_LEVEL = '/currentlevel';
@@ -43,3 +45,5 @@ export const GET_LIST_ROOM_CONTROL = '/listroomcontrol/';
 export const GET_LIST_LIGHT = '/listlight/';
 export const CONTROL_LIGHT = '/controllight';
 export const GET_LIGHT = '/getlight/';
+export const screenWidth =  Dimensions.get("window").width;
+export const screenHeight =  Dimensions.get("window").height;
