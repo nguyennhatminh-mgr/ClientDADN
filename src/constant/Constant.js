@@ -43,3 +43,6 @@ export const GET_LIST_ROOM_CONTROL = '/listroomcontrol/';
 export const GET_LIST_LIGHT = '/listlight/';
 export const CONTROL_LIGHT = '/controllight';
 export const GET_LIGHT = '/getlight/';
+
+// Notification
+export const GET_LIST_NOTIFICATION = '/notification/';

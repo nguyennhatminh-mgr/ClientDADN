@@ -25,7 +25,11 @@ import EditProfile from '../screens/EditProfile';
 import ChangePassword from '../screens/ChangePassword';
 import ListDevice from '../screens/control_device/ListDevice';
 import ControlLight from '../screens/control_device/ControlLight';
+import Notification from '../screens/notify/Notification';
+
+
 import RoomInfo from'../components/RoomInfo';
+
 
 const Stack = createStackNavigator();
 
@@ -91,13 +95,21 @@ export default function HomeNavigator(){
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"List of rooms"}}/>
             <Stack.Screen name="ListDevice" 
             component={ListDevice}
-            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"List of devices"}}/>
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"List of lights"}}/>
             <Stack.Screen name="ControlLight" 
             component={ControlLight}
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"Control light"}}/>
+
+
+            <Stack.Screen name="Notification" 
+            component={Notification}
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff", title:"Notifications"}}/>
+
+
             <Stack.Screen name="RoomInfo"
             component={RoomInfo}
             options={{headerShown: false}}/>
+
         </Stack.Navigator>
     );
 }

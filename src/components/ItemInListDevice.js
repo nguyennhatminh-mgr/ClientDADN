@@ -76,8 +76,8 @@ class ItemInListDevice extends Component{
                         this.showIcons()
                     }
                     <View>
-                        <Text>Light: {device_id}</Text>
-                        <Text>Value: {value}</Text>
+                        <Text style={{fontSize: 20, fontWeight: "600"}}>{device_id}</Text>
+                        <Text style={{textAlign:"center"}}>Value: {value}</Text>
                     </View>
                     <Switch
                         trackColor={{ false: "#767577", true: "#81b0ff" }}
