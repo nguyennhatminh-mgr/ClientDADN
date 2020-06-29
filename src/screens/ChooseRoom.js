@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text,StyleSheet, Dimensions,Alert } from 'react-native';
+import { View, Text,StyleSheet, Dimensions,Alert ,ActivityIndicator} from 'react-native';
 import axios from 'axios';
 
 import * as Constant from '../constant/Constant';
@@ -10,7 +10,7 @@ const height = Dimensions.get("window").height;
 const SUCCESS = "SUCCESS";
 
 function ChooseRoom({route,navigation}) {
-    const [listRoom,setListRoom] = useState([]);
+    const [listRoom,setListRoom] = useState(null);
     const [dataSignup,setDataSignup] = useState();
     const [idRoomChosen,setIdRoomChosen] = useState();
 
@@ -52,18 +52,25 @@ function ChooseRoom({route,navigation}) {
             <ScrollView style={{height: height-135}}>
                 <View>
                     {
-                        listRoom.map((value,index) => {
-                            if(value.id === idRoomChosen){
-                                return (
-                                    <ItemChooseRoom key={index} isChosen={true} getRoomChosen={getRoomChosen} id_room={value.id} name_room={value.name}/>
-                                );
-                            }
-                            else{
-                                return (
-                                    <ItemChooseRoom key={index} isChosen={false} getRoomChosen={getRoomChosen} id_room={value.id} name_room={value.name}/>
-                                );
-                            }
-                        })
+                        true && listRoom === null ? (
+                            <View style={{marginTop: 60}}>
+                                <ActivityIndicator size="large" color="blue"/>
+                            </View>
+                        ) : (
+                            listRoom.map((value,index) => {
+                                if(value.id === idRoomChosen){
+                                    return (
+                                        <ItemChooseRoom key={index} isChosen={true} getRoomChosen={getRoomChosen} id_room={value.id} name_room={value.name}/>
+                                    );
+                                }
+                                else{
+                                    return (
+                                        <ItemChooseRoom key={index} isChosen={false} getRoomChosen={getRoomChosen} id_room={value.id} name_room={value.name}/>
+                                    );
+                                }
+                            })
+                        )
+
                     }
                 </View>
                 <View style={{height: 100}}></View>

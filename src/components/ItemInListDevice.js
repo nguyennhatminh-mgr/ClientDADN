@@ -20,19 +20,19 @@ class ItemInListDevice extends Component{
     }
 
     showIcons = () => {
-        // if(this.state.isSwitch){
-        //     return (
-        //         <Icons size={42} name="lightbulb-on" color="#DFD616"/>
-        //     );
-        // }
-        // else{
-        //     return (
-        //         <Icons size={42} name="lightbulb" color="#DFD616"/>
-        //     );
-        // }
-        return (
-            <Icons size={42} name="lightbulb-on" color="#DFD616"/>
-        );
+        if(this.state.isSwitch){
+            return (
+                <Icons size={42} name="lightbulb-on" color="#DFD616"/>
+            );
+        }
+        else{
+            return (
+                <Icons size={42} name="lightbulb" color="#DFD616"/>
+            );
+        }
+        // return (
+        //     <Icons size={42} name="lightbulb-on" color="#DFD616"/>
+        // );
     }
 
     showText = () => {
@@ -65,26 +65,29 @@ class ItemInListDevice extends Component{
     }
 
     render(){
-        const {device_id,room_id} = this.props;
+        const {device_id,room_id,value,room_name} = this.props;
         return (
             <TouchableOpacity style={styles.container}
             onPress={() => {
-                this.props.navigation.navigate("ControlLight",{device_id: device_id, value: this.props.value,room_id: room_id})
+                this.props.navigation.navigate("ControlLight",{device_id: device_id, value: this.props.value,room_id: room_id,room_name:room_name})
             }}>
                 <View style={styles.inner_container}>
                     {
                         this.showIcons()
                     }
-                    <Text>Light: {device_id}</Text>
-                    {/* <Switch
+                    <View>
+                        <Text>Light: {device_id}</Text>
+                        <Text>Value: {value}</Text>
+                    </View>
+                    <Switch
                         trackColor={{ false: "#767577", true: "#81b0ff" }}
                         thumbColor={this.state.isEnabled ? "#f5dd4b" : "#f4f3f4"}
                         ios_backgroundColor="#3e3e3e"
                         onValueChange={this.toggleSwitch}
                         value={this.state.isSwitch}
                         disabled
-                    /> */}
-                    <FontAwesome name="baseball-ball" size={18} color="#1aaa1a"/>
+                    />
+                    {/* <FontAwesome name="baseball-ball" size={18} color="#1aaa1a"/> */}
                 </View>
                 {/* <Text>{new Date(this.props.received_time).toISOString()}</Text> */}
                 {/* <TextInput onChangeText={(lightLevel) => {this.isChangeLightLevel(lightLevel)}} placeholder="Light level"/> */}

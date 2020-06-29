@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Text,View,StyleSheet,TouchableOpacity} from 'react-native';
 import Icons from 'react-native-vector-icons/FontAwesome';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 class ItemInListRoom extends Component{
     render(){
@@ -8,10 +9,13 @@ class ItemInListRoom extends Component{
         return (
             <TouchableOpacity activeOpacity={0.5} style={styles.container}
             onPress={() => {
-                navigation.navigate("ListDevice",{room_id: room_id});
+                navigation.navigate("ListDevice",{room_id: room_id,room_name: room_name});
             }}>
-                <Icons name="home" size={40} color="#1aaa1a" style={{marginRight: 12}}/>
-                <Text>Room {room_name}</Text>
+                <View style={{flexDirection:"row",alignItems:"center"}}>
+                    <Icons name="home" size={40} color="#1aaa1a" style={{marginRight: 12}}/>
+                    <Text>Room {room_name}</Text>
+                </View>
+                <AntDesign name="arrowright" color="#8BC27C" size={28}/>
             </TouchableOpacity>
         );
     }
@@ -31,7 +35,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 6,
         paddingVertical: 16,
         flexDirection: "row",
-        alignItems:"center"
+        alignItems:"center",
+        justifyContent:"space-between"
     }
 });
 
