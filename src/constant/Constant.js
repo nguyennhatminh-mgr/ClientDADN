@@ -4,7 +4,7 @@ export const ID_ADMIN = '123AFFK89HM2';
 // export const IP_URL = 'http://10.0.134.191:3000';
 
 
-export const IP_URL = 'http://192.168.1.102:3000';
+export const IP_URL = 'http://192.168.0.110:3000';
 
 // export const IP_URL = 'http://192.168.43.125:3000';
 
@@ -50,3 +50,5 @@ export const screenHeight =  Dimensions.get("window").height;
 
 // Notification
 export const GET_LIST_NOTIFICATION = '/notification/';
+export const GET_ALL_NOTIFICATION = '/allnotification/';
+export const UPDATE_STATUS_NOTIFICATION = '/updatestatusnotification/';
