@@ -4,7 +4,7 @@ export const ID_ADMIN = '123AFFK89HM2';
 // export const IP_URL = 'http://10.0.134.191:3000';
 
 
-export const IP_URL = 'http://192.168.0.110:3000';
+export const IP_URL = 'http://192.168.0.108:3000';
 
 // export const IP_URL = 'http://192.168.43.125:3000';
 

@@ -47,8 +47,10 @@ export default class HistoryOp extends Component{
                         owner: '',
                     }
         return(
-            <ScrollView style={Styles.listContainer}>
-                <Text style={Styles.title}>List Room</Text>
+            <View style={Styles.listContainer}>
+            <Text style={Styles.title}>List Room</Text>
+            <View style={Styles.listRoom}>
+            <ScrollView>
                 {
                     (this.state.listRoom || false)?
                     (
@@ -66,23 +68,26 @@ export default class HistoryOp extends Component{
                     : (<ActivityIndicator size="large" color="#0000ff"/>)
                 }
             </ScrollView>
+            </View>
+            </View>
         );
     }
 }
 
 const Styles = StyleSheet.create({
+
     listContainer: {
         flex:1,
     },
+    listRoom:{
+        flex:7,
+    },
     title: {
-        flex:1,
-        justifyContent: 'center',
+        //flex:1,
         fontWeight: 'bold',
         color: 'blue',
         fontSize: 30,
         textAlign:'center',
-        alignItems: 'center',
-        // fontFamily:'Times New Roman'
     },
     
     blockItem:{
