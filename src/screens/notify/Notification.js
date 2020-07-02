@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text,ActivityIndicator } from 'react-native';
+import { View, Text,ActivityIndicator,TouchableOpacity,StyleSheet } from 'react-native';
 import axios from 'axios';
 
 import * as Constant from '../../constant/Constant';
@@ -21,6 +21,8 @@ const Notification = props => {
         });
     },[]);
 
+    const {id_user} = props.route.params;
+
     return (
         <View style={{flex: 1}}>
             {
@@ -32,9 +34,23 @@ const Notification = props => {
                     <ScrollView>
                     {
                         listNotifications.map((value,index) => 
-                            <ItemInNotification key={index} value={value}/>
+                            <ItemInNotification key={index} value={value} navigation={props.navigation}/>
                         )
                     }
+                    <TouchableOpacity activeOpacity={0.5} style={styles.container}
+                    onPress={() => {
+                        setListNotifications(null);
+                        axios.get(`${Constant.IP_URL}${Constant.GET_ALL_NOTIFICATION}${id_user}`)
+                        .then((response) => {
+                            // console.log(response.data);
+                            setListNotifications(response.data);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                    }}>
+                        <Text style={styles.text_view_all}>View all</Text>
+                    </TouchableOpacity>
                     </ScrollView>
                 )
             }
@@ -42,6 +58,16 @@ const Notification = props => {
     );
 };
 
-
+const styles = StyleSheet.create({
+    container: {
+        margin: 8,
+        marginRight: 16
+    },
+    text_view_all: {
+        textAlign:"right",
+        fontSize: 17,
+        color:"blue"
+    }
+});
 
 export default Notification;

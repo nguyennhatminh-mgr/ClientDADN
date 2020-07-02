@@ -1,16 +1,31 @@
 import React from 'react';
-import { View, Text,StyleSheet,TouchableOpacity } from 'react-native';
+import { View, Text,StyleSheet,TouchableOpacity,Alert } from 'react-native';
 import Icons from 'react-native-vector-icons/FontAwesome';
+import axios from 'axios';
+
+import * as Constant from '../constant/Constant';
 
 const ItemInNotification = props => {
-    const {value} = props;
+    const {value,navigation} = props;
     let date = new Date(value.createdAt);
     let bgColor = "#fff";
     if(value.status === 0){
         bgColor="#BBD9E7";
     }
+    // console.log(value);
     return (
-        <TouchableOpacity style={styles.container} activeOpacity={0.5}>
+        <TouchableOpacity style={styles.container} activeOpacity={0.5}
+        onPress={() => {
+            axios.get(`${Constant.IP_URL}${Constant.UPDATE_STATUS_NOTIFICATION}${value.id_notification}`)
+            .then((response) => {
+                if(response.data === "SUCCESS"){
+                    navigation.replace("ListDevice",{room_id: value.id_room,room_name: value.name});
+                }
+                else{
+                    Alert.alert("Update status notification failed!");
+                }
+            })
+        }}>
             <View style={{
                 flexDirection: "row",
                 backgroundColor: bgColor,
