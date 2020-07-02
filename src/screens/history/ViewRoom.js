@@ -1,12 +1,13 @@
 import React,{Component} from 'react';
-import { Alert ,View ,Text ,ActivityIndicator,TouchableOpacity, StyleSheet} from 'react-native';
+import { Alert ,View ,Text ,ActivityIndicator,TouchableOpacity, StyleSheet,Dimensions} from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
 import Axios from 'axios';
 import * as ConstantURL from '../../constant/Constant';
 import HistoryChar from '../../components/HistoryChart';
 import { FlatList } from 'react-native-gesture-handler';
-
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+const { width, height } = Dimensions.get('window');
 
 
 
@@ -41,6 +42,7 @@ export default class ViewRoom extends Component{
                 0,
                 0
               ],
+            indexData : -1,
         }
     }
 
@@ -102,11 +104,37 @@ export default class ViewRoom extends Component{
             this.setState({
                 chartDataset: res.data.map(item => item.value),
                 chartLabel: res.data.map(item => new Date(item.time).toTimeString().split(' ')[0]),
+                indexData: res.data.length < 5 ? -1 : res.data.length - 5,
             })
+            //console.log(this.state.indexData);
         }).catch((error)=>{
             console.log(error);
         })
     }
+
+    backward = ()=>{
+        if(this.state.chartDataset.length <= 5) return;
+        if(this.state.indexData - 5 < 0)
+            this.setState({
+                indexData: 0
+            })
+        else 
+            this.setState({
+                indexData: this.state.indexData - 5,
+            })
+    };
+
+    forward = ()=>{
+        if(this.state.chartDataset.length <= 5) return;
+        if(this.state.indexData + 10 > this.state.chartDataset.length)
+            this.setState({
+                indexData: this.state.chartDataset.length - 5,
+            })
+        else
+            this.setState({
+                indexData: this.state.indexData + 5,
+            })
+    };
 
     render(){
         return(
@@ -163,9 +191,20 @@ export default class ViewRoom extends Component{
                     </View>
                 </View>
                 <View style={styles.chartView}>
-                {HistoryChar(this.state.chartLabel, this.state.chartDataset)}
+                {   (this.state.indexData == -1) ?
+                    HistoryChar(this.state.chartLabel, this.state.chartDataset)
+                    :
+                    HistoryChar(this.state.chartLabel.slice(this.state.indexData,this.state.indexData+5), this.state.chartDataset.slice(this.state.indexData,this.state.indexData+5))
+                }
+                <View style={styles.btnList}>
+                    <TouchableOpacity onPress={()=>{this.backward()}}>
+                        <FontAwesome name="backward" size={height/20} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{this.forward()}}>
+                        <FontAwesome name="forward" size={height/20} />
+                    </TouchableOpacity>
                 </View>
-                
+                </View>
             </View>
         )
     }
@@ -189,7 +228,7 @@ const styles=StyleSheet.create({
         justifyContent: 'space-around',
     },
     chartView:{
-        flex:6
+        flex:5
     },
     list:{
         flex:1,
@@ -227,5 +266,11 @@ const styles=StyleSheet.create({
         fontSize:18,
         color: 'white',
         textAlign: 'center',
+    },
+    btnList:{
+        flex:1,
+        flexDirection:'row',
+        justifyContent:"space-around",
+        alignItems:"flex-start",
     }
 })
