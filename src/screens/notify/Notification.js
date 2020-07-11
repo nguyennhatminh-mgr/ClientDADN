@@ -37,20 +37,37 @@ const Notification = props => {
                             <ItemInNotification key={index} value={value} navigation={props.navigation}/>
                         )
                     }
-                    <TouchableOpacity activeOpacity={0.5} style={styles.container}
-                    onPress={() => {
-                        setListNotifications(null);
-                        axios.get(`${Constant.IP_URL}${Constant.GET_ALL_NOTIFICATION}${id_user}`)
-                        .then((response) => {
-                            // console.log(response.data);
-                            setListNotifications(response.data);
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
-                    }}>
-                        <Text style={styles.text_view_all}>View all</Text>
-                    </TouchableOpacity>
+                    <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+                        <TouchableOpacity activeOpacity={0.5} style={styles.container}
+                        onPress={() => {
+                            setListNotifications(null);
+                            const {id_user} = props.route.params;
+                            axios.get(`${Constant.IP_URL}${Constant.GET_LIST_NOTIFICATION}${id_user}`)
+                            .then((response) => {
+                                setListNotifications(response.data);
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                        }}>
+                            <Text style={styles.text_view_all}>Refresh</Text>
+                        </TouchableOpacity>
+                        
+                        <TouchableOpacity activeOpacity={0.5} style={styles.container}
+                        onPress={() => {
+                            setListNotifications(null);
+                            axios.get(`${Constant.IP_URL}${Constant.GET_ALL_NOTIFICATION}${id_user}`)
+                            .then((response) => {
+                                // console.log(response.data);
+                                setListNotifications(response.data);
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                        }}>
+                            <Text style={styles.text_view_all}>View all</Text>
+                        </TouchableOpacity>
+                    </View>
                     </ScrollView>
                 )
             }
