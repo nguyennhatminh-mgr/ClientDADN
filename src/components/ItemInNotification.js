@@ -44,6 +44,7 @@ const ItemInNotification = props => {
 
 const styles = StyleSheet.create({
     container:{
+        flex: 1,
         marginHorizontal: 6,
         marginVertical: 4,
         backgroundColor: "#fff",
@@ -55,10 +56,12 @@ const styles = StyleSheet.create({
         borderRadius: 4
     },
     icon_style: {
-        margin: 4
+        margin: 4,
+        flex: 1
     },
     wrap_content: {
-        paddingHorizontal: 4
+        paddingHorizontal: 4,
+        flex: 8
     }
 });
 

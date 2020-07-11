@@ -1,12 +1,12 @@
 import React from 'react';
-import { TouchableOpacity ,StyleSheet, Text, View,ScrollView, ImageBackground} from 'react-native';
+import { TouchableOpacity ,StyleSheet, Text, View,ScrollView, ImageBackground,ActivityIndicator} from 'react-native';
 import ItemInRoomInfo from './ItemInRoomInfo';
 import * as Constant from '../constant/Constant';
 export default class RoomInfo extends React.Component{
   constructor(props){
     super(props);
     this.state ={
-      dataSource :[],
+      dataSource :null,
       userID : this.props.route.params.userID,
       owner:  this.props.route.params.owner,
       roomID: this.props.route.params.roomID
@@ -39,12 +39,14 @@ export default class RoomInfo extends React.Component{
      }
   calcBrightness =(obj)=>
   {
-    this.state.dataSource.map((item, index)=>{
-      if(item.type =="sensor"||item.type =="Sensor"||item.type =="SENSOR") {
-        obj.br += item.value;
-        obj.i+=1;
-      }
-    })
+    if(this.state.dataSource){
+      this.state.dataSource.map((item, index)=>{
+        if(item.type =="sensor"||item.type =="Sensor"||item.type =="SENSOR") {
+          obj.br += item.value;
+          obj.i+=1;
+        }
+      })
+    }
   }
     render(){
       let obj ={br:0, i:0};
@@ -66,9 +68,15 @@ export default class RoomInfo extends React.Component{
             </View>
             <View style={styles.container2}>
             <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center'}}>
-              {(this.state.dataSource.length >0) ?
-                (this.state.dataSource.map((item, index)=> <ItemInRoomInfo key = {index} id= {item.deviceID} type ={item.type} value= {item.value} time ={this.convertDate(item.time)}/>)):
-                <Text style ={styles.bigText}>There is no device here!</Text>}
+              {
+                this.state.dataSource === null ? (
+                  <ActivityIndicator size="large" color="blue"/>
+                ) : (
+                  (this.state.dataSource.length >0) ?
+                  (this.state.dataSource.map((item, index) => <ItemInRoomInfo key = {index} id= {item.deviceID} type ={item.type} value= {item.value} time ={this.convertDate(item.time)}/>)):
+                  <Text style ={styles.bigText}>There is no device here!</Text>
+                )
+              }
             </ScrollView>
             </View>           
             <View style={styles.brightness}>
@@ -86,6 +94,14 @@ export default class RoomInfo extends React.Component{
               <TouchableOpacity style = {styles.button} onPress ={()=> navigation.goBack()}>
                     <Text style ={styles.title_button}>Back</Text>
               </TouchableOpacity>
+              <TouchableOpacity style = {styles.button} onPress ={() => {
+                this.setState({
+                  dataSource: null
+                });
+                this.getData();
+              }}>
+                    <Text style ={styles.title_button}>Refresh</Text>
+              </TouchableOpacity>
             </View>
             </ImageBackground>
           </View>
@@ -100,7 +116,10 @@ export default class RoomInfo extends React.Component{
     },
     container1:{flex: 1,
       justifyContent: 'center',
-      alignItems: 'center'},
+      alignItems: 'center',
+      flexDirection:"row"
+    },
+      
     container2:{
       flex: 5, 
       padding: 10*Constant.screenHeight/748
@@ -126,8 +145,10 @@ export default class RoomInfo extends React.Component{
       alignItems: 'center',
       backgroundColor: '#1aaa1a',
       padding: 10*Constant.screenHeight/748, 
-      borderRadius: 15, 
-      width: 250*Constant.screenWidth/411},
+      borderRadius: 15,
+      paddingHorizontal: 30,
+      marginRight: 4
+    },
       brightness:{
         flex: 1, 
         backgroundColor: 'white',
@@ -162,3 +183,4 @@ export default class RoomInfo extends React.Component{
     }
   });
 
+// width: 250*Constant.screenWidth/411
