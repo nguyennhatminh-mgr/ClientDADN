@@ -29,6 +29,8 @@ export const GET_CURRENT_LIGHT_LEVEL = '/currentlevel';
 export const EDIT_NAME = '/users/editname';
 export const CHECK_PASSWORD = '/users/checkpassword';
 export const CHANGE_PASSWORD = '/users/changepassword';
+export const FORGOT_PASSWORD = '/users/forgotpassword';
+
 
 //addObj
 export const ADD_ROOM_URL = '/addRoom';

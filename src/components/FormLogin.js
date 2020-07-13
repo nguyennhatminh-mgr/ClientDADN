@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Image, View, TextInput,StyleSheet, TouchableOpacity,Text} from 'react-native';
+import {Image, View, TextInput,StyleSheet, TouchableOpacity,Text,ActivityIndicator} from 'react-native';
 
 export default class FormLogin extends Component{
     constructor(props) {
@@ -35,6 +35,7 @@ export default class FormLogin extends Component{
                     <TextInput defaultValue={password} secureTextEntry={true} onChangeText={(password) => this.isChangePassword(password)} name="password" style={styles.username_input} placeholder="Password"/>
                 </View>
                 <View>
+                       
                     <TouchableOpacity style={styles.btn_submit}
                     onPress={() => {
                         var data_login = {};
@@ -45,12 +46,18 @@ export default class FormLogin extends Component{
                     }}>
                         <Text style={styles.text_btn_submit}>LOGIN</Text>
                     </TouchableOpacity>
+                        
                 </View>
                 <View style={styles.create_account}>
+                    <TouchableOpacity>
+                        <Text onPress={() => {
+                            this.props.navigation.replace("SignUp");
+                        }} style={styles.create_account_text}>Create Account</Text>
+                    </TouchableOpacity>
                     <Text onPress={() => {
-                        this.props.navigation.replace("SignUp");
-                    }} style={styles.create_account_text}>Create Account</Text>
-                    <Text style={styles.create_account_text}>Forgot Password?</Text>
+                        this.props.navigation.navigate("ForgotPass");
+                    }}
+                    style={styles.create_account_text}>Forgot Password?</Text>
                 </View>
             </View>
         );
