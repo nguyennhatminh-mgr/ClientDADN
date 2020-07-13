@@ -29,6 +29,7 @@ import Notification from '../screens/notify/Notification';
 
 
 import RoomInfo from'../components/RoomInfo';
+import ForgotPass from '../screens/ForgotPass';
 
 
 const Stack = createStackNavigator();
@@ -61,6 +62,9 @@ export default function HomeNavigator(){
             <Stack.Screen name="ChangePassword"
             component={ChangePassword}
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff",title:"Change password"}}/>
+            <Stack.Screen name="ForgotPass"
+            component={ForgotPass}
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff",title:"Forgot password"}}/>
             
             <Stack.Screen name="AddObject"
             component={AddObject}

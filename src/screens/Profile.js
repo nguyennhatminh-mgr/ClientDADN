@@ -85,7 +85,7 @@ export default class Profile extends Component{
                         onPress={() => {
                             
                         }}>
-                            <FontAweSome name="edit" size={24} color="#3180c2"/>
+                            {/* <FontAweSome name="edit" size={24} color="#3180c2"/> */}
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity style={styles.profile_row} activeOpacity={0.5}
