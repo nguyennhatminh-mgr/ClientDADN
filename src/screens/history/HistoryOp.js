@@ -11,7 +11,7 @@ const Items = ({name,id,owner,onClick}) => {
                 <Icons name="home" size={40} color="#1aaa1a" style={{marginRight: 12}}/>
                 <View style={Styles.item}>
                     <Text style={Styles.text}> Room: {name}</Text>
-                    <Text style={Styles.text}> ID: {id}</Text>
+                    {/* <Text style={Styles.text}> ID: {id}</Text> */}
                     <Text style={Styles.text}> User: {owner} </Text>
                 </View>
             </TouchableOpacity>
@@ -110,5 +110,9 @@ const Styles = StyleSheet.create({
     },
     text:{
         fontSize:20
+    },
+    item: {
+        paddingHorizontal: 4,
+        paddingVertical: 8
     }
 })
