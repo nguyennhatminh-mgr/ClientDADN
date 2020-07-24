@@ -86,7 +86,7 @@ export default class RoomInfo extends React.Component{
                   Brightness: 0
                 </Text>):
                 (<Text style={styles.text}>
-                  Brightness: {obj.br/obj.i}
+                  Brightness: {Math.ceil(obj.br/obj.i)}
                 </Text>)
               }
             </View>
