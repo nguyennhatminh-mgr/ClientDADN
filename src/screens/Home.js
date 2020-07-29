@@ -42,10 +42,15 @@ export default function Home({navigation,route}){
                  true && id_user === Constant.ID_ADMIN ? (
                     <View style={styles.rowinhome}>
                         <ItemInHome id_user={id_user} navigation={navigation} screen="Notification" image={notification} title="Notifications"/>
-                        <View style={{flex: 1, marginHorizontal: 8}}></View>
+                        <ItemInHome id_user={id_user} navigation={navigation} screen="RemoveRoom" image={add_device} title="Remove device"/>
                     </View>
-                ) : null
+                ) : 
+                (<View style={styles.rowinhome}>
+                <ItemInHome id_user={id_user} navigation={navigation} screen="RemoveRoom" image={add_device} title="Remove device"/>
+                <View style={{flex: 1, marginHorizontal: 8}}></View>
+                </View>)
             }
+            
         </ScrollView>
 
     );

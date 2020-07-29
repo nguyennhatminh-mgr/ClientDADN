@@ -4,7 +4,7 @@ export const ID_ADMIN = '123AFFK89HM2';
 // export const IP_URL = 'http://10.0.134.191:3000';
 
 
-export const IP_URL = 'http://192.168.0.110:3000';
+export const IP_URL = 'http://192.168.0.108:3000';
 
 // export const IP_URL = 'http://192.168.43.125:3000';
 
@@ -35,6 +35,10 @@ export const FORGOT_PASSWORD = '/users/forgotpassword';
 //addObj
 export const ADD_ROOM_URL = '/addRoom';
 export const ADD_DIVICE_URL = '/addDevice';
+//delete Obj
+export const GET_LIST_DEVICE = '/listDevice/';
+export const DELETE_ROOM_URL = '/removeRoom';
+export const DELETE_DEVICE_URL = '/removeDevice';
 
 //viewHistory
 export const VIEW_HISTORY_URL = '/viewHistory';

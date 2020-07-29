@@ -11,6 +11,8 @@ import AddObject from '../screens/addObject';
 import AddSensor from '../screens/addSensor';
 import AddLight from '../screens/addLight';
 import AddRoom from '../screens/addRoom';
+import RemoveDevice from '../screens/removeDevice';
+import RemoveRoom from '../screens/removeRoom';
 
 //import History from './History';
 import History from '../screens/history/HistoryOp';
@@ -73,6 +75,14 @@ export default function HomeNavigator(){
             <Stack.Screen name="AddSensor"
             component={AddSensor}
             options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff",title:"Add new sensor"}}/>
+            
+            <Stack.Screen name="RemoveDevice"
+            component={RemoveDevice}
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff",title:"Remove Device"}}/>
+
+            <Stack.Screen name="RemoveRoom"
+            component={RemoveRoom}
+            options={{headerStyle: {backgroundColor: "#1aaa1a"}, headerTintColor: "#fff",title:"Remove Room"}}/>
 
             <Stack.Screen name="AddLight"
             component={AddLight}
