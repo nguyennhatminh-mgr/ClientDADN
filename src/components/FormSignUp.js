@@ -113,20 +113,20 @@ export default class FormSignUp extends Component{
             <View style={styles.container}>
                 <View style={styles.wrap_input}>
                     <Image style={styles.icon_input} source={require('../assets/images/username.png')}/>
-                    <TextInput onChangeText={(realname) => {this.isChangeRealName(realname)}} style={styles.email_input} name="realname" placeholder="Name"/>
+                    <TextInput onChangeText={(realname) => {this.isChangeRealName(realname)}} style={styles.email_input} name="realname" placeholder="Name" placeholderTextColor="#D5E3E8"/>
                 </View>
                 <View style={styles.wrap_input}>
                     <Image style={styles.icon_input} source={require('../assets/images/username.png')}/>
-                    <TextInput onChangeText={(username) => {this.isChangeUsername(username)}} style={styles.email_input} name="username" placeholder="Email"/>
+                    <TextInput onChangeText={(username) => {this.isChangeUsername(username)}} style={styles.email_input} name="username" placeholder="Email" placeholderTextColor="#D5E3E8"/>
                 </View>
                 <View style={styles.wrap_input}>
                     <Image style={styles.icon_input} source={require('../assets/images/password.png')}/>
-                    <TextInput onChangeText={(password) => {this.isChangePassword(password)}} secureTextEntry={true} name="password" style={styles.email_input} placeholder="Password"
+                    <TextInput onChangeText={(password) => {this.isChangePassword(password)}} secureTextEntry={true} name="password" style={styles.email_input} placeholder="Password" placeholderTextColor="#D5E3E8"
                     />
                 </View>
                 <View style={styles.wrap_input}>
                     <Image style={styles.icon_input} source={require('../assets/images/password.png')}/>
-                    <TextInput onChangeText={(retypepassword) => {this.isChangeRetypePassword(retypepassword)}} secureTextEntry={true} name="retypepassword" style={styles.email_input} placeholder="Retype Password"/>
+                    <TextInput onChangeText={(retypepassword) => {this.isChangeRetypePassword(retypepassword)}} secureTextEntry={true} name="retypepassword" style={styles.email_input} placeholder="Retype Password" placeholderTextColor="#D5E3E8"/>
                     {
                         this.isShowCheckedIcon()
                     }

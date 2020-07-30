@@ -58,3 +58,4 @@ export const screenHeight =  Dimensions.get("window").height;
 export const GET_LIST_NOTIFICATION = '/notification/';
 export const GET_ALL_NOTIFICATION = '/allnotification/';
 export const UPDATE_STATUS_NOTIFICATION = '/updatestatusnotification/';
+export const NUM_NOTIFICATION = '/numnotification/';
