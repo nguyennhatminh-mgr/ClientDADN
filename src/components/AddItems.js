@@ -13,7 +13,7 @@ export default class Items extends React.Component {
                         style={Styles.row_2_Info} 
                         placeholder={this.props.placeholder} 
                         onChangeText={textParam => this.props.setText(textParam, this.props.type)}
-                        placeholderTextColor="#000" 
+                        placeholderTextColor="#D5E3E8" 
                         fontSize={height / 30}
                     >
                     </TextInput>
@@ -27,10 +27,9 @@ export default class Items extends React.Component {
 const Styles = StyleSheet.create({
     rowInfo:{
         marginHorizontal:"3%",
-        borderBottomWidth:1,
-        borderBottomColor:"#d8c593",
         marginVertical:"2%",
-        height:"25%"
+        height:"25%",
+        marginBottom: 32
     },
     row_1_Info:{
       height:"50%",
@@ -46,6 +45,13 @@ const Styles = StyleSheet.create({
     roomInfo:{
         color:"#000",
         fontSize:height / 25,
+        borderBottomWidth:1,
+        borderBottomColor:"#d8c593"
+    },
+    row_2_Info:{
+        borderBottomWidth:1,
+        borderBottomColor:"#d8c593",
+        marginBottom: 16
     }
 })
 

@@ -108,29 +108,31 @@ export default class AddSensorScreen extends React.Component{
             </View>
     
             <View style={Styles.body}>  
-                <View style={Styles.Info}>
-                    <Items type={"Room ID"} placeholder={"201h1"} setText={this.setText} room_id={this.state.Room}/>
-                    <Items type={"ID"} placeholder={"S1"} setText={this.setText}/>
-                </View>
-    
-                <View style={Styles.btnContainer}>
-                    <View style={Styles.btn}>
-                        <Button
-                        onPress={this.addSensorAction}
-                        title="Save"
-                        color="#841584"
-                        />
+                <ScrollView>
+                    <View style={Styles.Info}>
+                        <Items type={"Room ID"} placeholder={"201h1"} setText={this.setText} room_id={this.state.Room}/>
+                        <Items type={"ID"} placeholder={"Enter ID sensor"} setText={this.setText}/>
                     </View>
-                    
-                    <View style={Styles.btn}>
-                        <Button
-                            onPress={()=>this.props.navigation.navigate("AddObject",{id_user:this.props.route.params.id_user})}
-                            title="Cancle"
+        
+                    <View style={Styles.btnContainer}>
+                        <View style={Styles.btn}>
+                            <Button
+                            onPress={this.addSensorAction}
+                            title="Save"
                             color="#841584"
-                        />
+                            />
+                        </View>
+                        
+                        <View style={Styles.btn}>
+                            <Button
+                                onPress={()=>this.props.navigation.navigate("AddObject",{id_user:this.props.route.params.id_user})}
+                                title="Cancle"
+                                color="#841584"
+                            />
+                        </View>
+                        
                     </View>
-                    
-                </View>
+                </ScrollView>
             </View> 
         </View>
         );
@@ -195,5 +197,6 @@ const Styles = StyleSheet.create({
         height:"35%",
         borderRadius:20,
         backgroundColor:"lightblue",
+        paddingBottom: 16
     }
 })

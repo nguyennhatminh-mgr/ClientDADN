@@ -8,6 +8,7 @@ import room_info from '../assets/images/room_info.jpg';
 import control_device from '../assets/images/control_device.jpg';
 import history from '../assets/images/history.jpg';
 import notification from '../assets/images/notification.png';
+import remove_device from '../assets/images/remove_device.png';
 import * as Constant from '../constant/Constant';
 import ItemNotify from '../components/ItemNotify';
 
@@ -47,12 +48,12 @@ export default function Home({navigation,route}){
                         {/* <ItemInHome id_user={id_user} navigation={navigation} screen="Notification" image={notification} title="Notifications"/> */}
                         <ItemNotify id_user={id_user} navigation={navigation} screen="Notification" image={notification} title="Notifications"/>
                         
-                        <ItemInHome id_user={id_user} navigation={navigation} screen="RemoveRoom" image={add_device} title="Remove device"/>
+                        <ItemInHome id_user={id_user} navigation={navigation} screen="RemoveRoom" image={remove_device} title="Remove device"/>
 
                     </View>
                 ) : 
                 (<View style={styles.rowinhome}>
-                <ItemInHome id_user={id_user} navigation={navigation} screen="RemoveRoom" image={add_device} title="Remove device"/>
+                <ItemInHome id_user={id_user} navigation={navigation} screen="RemoveRoom" image={remove_device} title="Remove device"/>
                 <View style={{flex: 1, marginHorizontal: 8}}></View>
                 </View>)
             }

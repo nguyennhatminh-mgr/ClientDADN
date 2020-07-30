@@ -5,6 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Items from '../components/AddItems';
 import axios from 'axios';
 import * as ConstantURL from '../constant/Constant';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export default class AddSensorScreen extends React.Component{
@@ -69,31 +70,33 @@ export default class AddSensorScreen extends React.Component{
             </View>
     
             <View style={Styles.body}>  
-                <View style={Styles.Info}>
-                    {/* <Items type={"AdminRoom"} placeholder={"Ngo Ba Kha"} setText={this.setText}/> */}
-                    <Items type={"ID"} placeholder={"R1"} setText={this.setText}/>
-                    <Items type={"Name"} placeholder={"101H6"} setText={this.setText}/>
-                </View>
-    
-                <View style={Styles.btnContainer}>
-                    <View style={Styles.btn}>
-                        <Button
-                        onPress={this.addRoomAction}
-                        title="Save"
-                        color="#841584"
-                        accessibilityLabel="add new Room to database"
-                        />
+                <ScrollView>
+                    <View style={Styles.Info}>
+                        {/* <Items type={"AdminRoom"} placeholder={"Ngo Ba Kha"} setText={this.setText}/> */}
+                        <Items type={"ID"} placeholder={"R1"} setText={this.setText}/>
+                        <Items type={"Name"} placeholder={"101H6"} setText={this.setText}/>
                     </View>
-                    
-                    <View style={Styles.btn}>
-                        <Button
-                            onPress={()=>this.props.navigation.navigate("AddObject")}
-                            title="Cancle"
+        
+                    <View style={Styles.btnContainer}>
+                        <View style={Styles.btn}>
+                            <Button
+                            onPress={this.addRoomAction}
+                            title="Save"
                             color="#841584"
-                            accessibilityLabel="leave this screen without Save"
-                        />
+                            accessibilityLabel="add new Room to database"
+                            />
+                        </View>
+                        
+                        <View style={Styles.btn}>
+                            <Button
+                                onPress={()=>this.props.navigation.navigate("AddObject")}
+                                title="Cancle"
+                                color="#841584"
+                                accessibilityLabel="leave this screen without Save"
+                            />
+                        </View>
                     </View>
-                </View>
+                </ScrollView>
             </View> 
         </View>
         );
@@ -164,5 +167,6 @@ const Styles = StyleSheet.create({
         height:"35%",
         borderRadius:20,
         backgroundColor:"lightblue",
+        paddingBottom: 16
       }
 })
