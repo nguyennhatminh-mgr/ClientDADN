@@ -2,4 +2,5 @@
 
 <br/>
 
-## 
+## Database (EERD)
+![image](Image/DatabaseEERD.png)
