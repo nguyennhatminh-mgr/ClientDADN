@@ -68,3 +68,9 @@
 
 ## Database (EERD)
 ![image](Image/DatabaseEERD.png)
+<br/>
+<br/>
+
+## Database (EERD)
+![image](Image/DatabaseRelation.png)
+
